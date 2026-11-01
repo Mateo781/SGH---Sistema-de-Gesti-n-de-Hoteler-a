@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGH | Executive Grand Hotel Management — Portal Gerente</title>
+  <meta name="description" content="Sistema de Gestión Hotelera (SGH) - Panel de Control Ejecutivo y Auditoría para Gerencia.">
+  
+  <!-- Google Fonts: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Modern Executive Interface) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Phosphor Icons for Crisp Precision -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Hoja de estilos en carpeta /css -->
+  <link rel="stylesheet" href="css/styles.css?v=12">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- OVERLAY PARA MENÚ MÓVIL RESPONSIVE -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- SIDEBAR DE NAVEGACIÓN (AZUL MARINO PROFUNDO) -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="brand-crest">
+            <i class="ph-bold ph-buildings"></i>
+          </div>
+          <div class="brand-meta">
+            <span class="brand-name">GRAND SGH</span>
+            <span class="brand-sub">LUXURY RESIDENCES & HOTEL</span>
+          </div>
+        </div>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Cerrar menú">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <!-- Indicador de Usuario Activo -->
+      <div class="user-badge-executive">
+        <div class="user-avatar-wrap">
+          <div class="user-avatar">MG</div>
+          <span class="user-status-dot" title="Sesión activa"></span>
+        </div>
+        <div class="user-info">
+          <span class="user-name">Lic. Mateo González</span>
+          <span class="user-role-tag">
+            <i class="ph-fill ph-crown"></i> Gerente General
+          </span>
+        </div>
+      </div>
+
+      <!-- Navegación alineada estrictamente con los Casos de Uso del Gerente -->
+      <nav class="nav-menu">
+        <span class="nav-section-label">CASOS DE USO — GERENCIA</span>
+        
+        <button class="nav-link active" data-tab="tab-overview" id="nav-overview">
+          <i class="ph ph-chart-polar"></i>
+          <span>Resumen Ejecutivo</span>
+        </button>
+
+        <button class="nav-link" data-tab="tab-reservas" id="nav-reservas">
+          <i class="ph ph-calendar-check"></i>
+          <span class="flex-grow">Gestionar Reservas</span>
+          <span class="badge-counter" id="badge-active-reservas">6</span>
+        </button>
+
+        <button class="nav-link" data-tab="tab-usuarios" id="nav-usuarios">
+          <i class="ph ph-users-three"></i>
+          <span class="flex-grow">Gestionar Usuarios</span>
+          <span class="badge-role">Lista</span>
+        </button>
+
+        <button class="nav-link" data-tab="tab-reportes" id="nav-reportes">
+          <i class="ph ph-file-text"></i>
+          <span>Reportes & Auditoría</span>
+        </button>
+
+        <span class="nav-section-label" style="margin-top: 1.25rem;">ECOSISTEMA SGH</span>
+        <div class="ecosystem-shortcuts">
+          <div class="eco-pill" title="Portal Cliente en preparación">
+            <i class="ph ph-user"></i> Cliente
+          </div>
+          <div class="eco-pill" title="Portal Personal de Limpieza en preparación">
+            <i class="ph ph-sparkle"></i> Personal Limpieza
+          </div>
+          <div class="eco-pill" title="Portal Mantenimiento en preparación">
+            <i class="ph ph-wrench"></i> Mantenimiento
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="hotel-status-widget">
+          <div class="status-indicator-ping"></div>
+          <div>
+            <div class="hotel-status-title">Temporada Alta 2026</div>
+            <div class="hotel-status-desc">Ocupación Actual: <strong>88.4%</strong></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="main-content">
+      
+      <!-- TOPBAR (BLANCO ALABASTRO Y ELEVACIÓN SUAVE) -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Abrir menú de navegación">
+            <i class="ph-bold ph-list"></i>
+          </button>
+          <div>
+            <div class="view-breadcrumb">
+              <span>SGH Enterprise</span>
+              <i class="ph ph-caret-right"></i>
+              <span class="current-crumb" id="current-crumb">Resumen Ejecutivo</span>
+            </div>
+            <h1 class="page-title" id="page-title">Panel de Control Gerencial</h1>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="quick-stat-bar">
+            <div class="stat-bubble">
+              <span class="label">Check-ins Hoy</span>
+              <span class="val highlight">14</span>
+            </div>
+            <div class="stat-bubble">
+              <span class="label">Hab. Disponibles</span>
+              <span class="val">18 / 150</span>
+            </div>
+            <div class="stat-bubble">
+              <span class="label">Ingreso Estimado Mes</span>
+              <span class="val navy">$148,250</span>
+            </div>
+          </div>
+
+          <button class="btn-primary-action" id="btn-quick-report" title="Crear reporte inmediato">
+            <i class="ph-bold ph-plus-circle"></i>
+            <span>Nuevo Reporte</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENEDOR DE SECCIONES (TABS) -->
+      <div class="content-wrapper">
+
+        <!-- ============================================== -->
+        <!-- TAB 1: RESUMEN EJECUTIVO (OVERVIEW)            -->
+        <!-- ============================================== -->
+        <section class="tab-pane active" id="tab-overview">
+          
+          <!-- Banner Hero Ejecutivo -->
+          <div class="luxury-hero-card">
+            <div class="hero-content">
+              <div class="hero-subtitle">SISTEMA INTEGRAL DE GESTIÓN HOTELERA</div>
+              <h2 class="hero-heading">Excelencia Operativa & Control de Hospitalidad</h2>
+              <p class="hero-desc">
+                Supervisión centralizada de huéspedes, inventario de suites, directivas de mantenimiento e indicadores financieros en tiempo real.
+              </p>
+              <div class="hero-metrics-strip">
+                <div class="strip-item">
+                  <span class="strip-number">98.2%</span>
+                  <span class="strip-label">Índice de Satisfacción</span>
+                </div>
+                <div class="strip-divider"></div>
+                <div class="strip-item">
+                  <span class="strip-number">24 min</span>
+                  <span class="strip-label">T. Medio Limpieza</span>
+                </div>
+                <div class="strip-divider"></div>
+                <div class="strip-item">
+                  <span class="strip-number">0 Pend.</span>
+                  <span class="strip-label">Incidencias Críticas</span>
+                </div>
+              </div>
+            </div>
+            <div class="hero-gold-crest">
+              <i class="ph-thin ph-shield-check"></i>
+            </div>
+          </div>
+
+          <!-- Métricas Primarias -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Reservas Confirmadas</span>
+                <div class="metric-icon-wrap">
+                  <i class="ph-bold ph-bookmarks"></i>
+                </div>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-value" id="stat-total-reservas">132</span>
+                <span class="metric-badge positive"><i class="ph-bold ph-trend-up"></i> +12.4%</span>
+              </div>
+              <div class="metric-footer">6 pendientes de auditoría hoy</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Tasa de Ocupación</span>
+                <div class="metric-icon-wrap">
+                  <i class="ph-bold ph-bed"></i>
+                </div>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-value">88.4%</span>
+                <span class="metric-badge neutral">132 / 150 Suites</span>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width: 88.4%;"></div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Personal Activo</span>
+                <div class="metric-icon-wrap">
+                  <i class="ph-bold ph-users-four"></i>
+                </div>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-value" id="stat-staff-count">24</span>
+                <span class="metric-badge info">4 Turnos</span>
+              </div>
+              <div class="metric-footer">Limpieza: 14 | Mantenimiento: 10</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-label">Reportes de Auditoría</span>
+                <div class="metric-icon-wrap">
+                  <i class="ph-bold ph-file-arrow-up"></i>
+                </div>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-value" id="stat-report-count">18</span>
+                <span class="metric-badge positive">Al día</span>
+              </div>
+              <div class="metric-footer">Último informe enviado hoy</div>
+            </div>
+          </div>
+
+          <!-- Cuadrícula Asimétrica: Reservas Urgentes vs Estado Operativo -->
+          <div class="dashboard-split-grid">
+            
+            <!-- Columna Izquierda: Auditoría Rápida de Reservas -->
+            <div class="panel-card flex-grow">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Auditoría Rápida de Reservas</h3>
+                  <p class="panel-subtitle">Últimas solicitudes que requieren confirmación o intervención gerencial</p>
+                </div>
+                <button class="btn-ghost-sm" onclick="switchTab('tab-reservas')">
+                  Ver Todas <i class="ph ph-arrow-right"></i>
+                </button>
+              </div>
+
+              <div class="table-container">
+                <table class="luxury-table">
+                  <thead>
+                    <tr>
+                      <th>CÓDIGO</th>
+                      <th>HUÉSPED & SUITE</th>
+                      <th>ESTADÍA</th>
+                      <th>ESTADO</th>
+                      <th class="text-right">ACCIÓN</th>
+                    </tr>
+                  </thead>
+                  <tbody id="overview-reservas-body">
+                    <!-- Dinámico vía JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Monitoreo de Equipos (Mantenimiento & Limpieza) -->
+            <div class="panel-card width-sidebar-complement">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Sincronización de Equipos</h3>
+                  <p class="panel-subtitle">Interacción en tiempo real con roles operativos</p>
+                </div>
+              </div>
+
+              <div class="team-pulse-list">
+                <div class="team-pulse-item">
+                  <div class="pulse-icon cleaning">
+                    <i class="ph-bold ph-sparkle"></i>
+                  </div>
+                  <div class="pulse-details">
+                    <div class="pulse-title">Personal de Limpieza</div>
+                    <div class="pulse-sub">12 suites en preparación · 8 limpias y verificadas</div>
+                  </div>
+                  <span class="pulse-status-badge active">Activo</span>
+                </div>
+
+                <div class="team-pulse-item">
+                  <div class="pulse-icon maintenance">
+                    <i class="ph-bold ph-wrench"></i>
+                  </div>
+                  <div class="pulse-details">
+                    <div class="pulse-title">Encargados de Mantenimiento</div>
+                    <div class="pulse-sub">2 órdenes en curso (Suite 304, Piscina)</div>
+                  </div>
+                  <span class="pulse-status-badge warning">En Curso</span>
+                </div>
+
+                <div class="team-pulse-item">
+                  <div class="pulse-icon reception">
+                    <i class="ph-bold ph-door"></i>
+                  </div>
+                  <div class="pulse-details">
+                    <div class="pulse-title">Recepción & Clientes VIP</div>
+                    <div class="pulse-sub">Check-in de comitiva diplomática 18:00hs</div>
+                  </div>
+                  <span class="pulse-status-badge active">Listo</span>
+                </div>
+              </div>
+
+              <div class="quick-action-cta">
+                <div class="cta-text">¿Desea generar el consolidado de auditoría del día?</div>
+                <button class="btn-outline w-100" onclick="openReportModal()">
+                  <i class="ph ph-file-pdf"></i> Generar Informe Ejecutivo
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 2: GESTIONAR RESERVAS                      -->
+        <!-- Casos de Uso: Auditar Reservas, Cancelar       -->
+        <!-- Reserva Manualmente                            -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-reservas">
+          
+          <div class="section-top-actions">
+            <div>
+              <h2 class="section-title">Auditoría & Gestión de Reservas</h2>
+              <p class="section-subtitle">
+                Supervisión detallada de reservas, validación de pagos, inspección de check-ins y cancelación manual excepcional.
+              </p>
+            </div>
+            
+            <div class="filters-cluster">
+              <div class="search-input-wrap">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" id="reserva-search" placeholder="Buscar por huésped, código o suite..." oninput="filterReservas()">
+              </div>
+              <select id="reserva-status-filter" class="luxury-select" onchange="filterReservas()">
+                <option value="ALL">Todos los Estados</option>
+                <option value="CONFIRMADA">Confirmada</option>
+                <option value="CHECK_IN">En Estadía</option>
+                <option value="PENDIENTE_PAGO">Pendiente Pago</option>
+                <option value="CANCELADA">Canceladas</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Tabla Completa de Reservas -->
+          <div class="panel-card">
+            <div class="table-container">
+              <table class="luxury-table full-table">
+                <thead>
+                  <tr>
+                    <th>CÓDIGO</th>
+                    <th>HUÉSPED & CONTACTO</th>
+                    <th>SUITE / TIPO</th>
+                    <th>ESTADÍA</th>
+                    <th>MONTO</th>
+                    <th>ESTADO & PAGO</th>
+                    <th class="text-right">ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody id="reservas-table-body">
+                  <!-- Llenado dinámico vía JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-footer-meta">
+              <span id="reservas-count-indicator">Mostrando 6 reservas</span>
+              <div class="table-legend">
+                <span class="legend-dot active"></span> Activa
+                <span class="legend-dot warning"></span> Requiere Pago
+                <span class="legend-dot danger"></span> Cancelada
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 3: GESTIONAR USUARIOS (LISTA / TABLE VIEW) -->
+        <!-- Casos de Uso: Asignar Roles, Inhabilitar       -->
+        <!-- Usuario                                        -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-usuarios">
+          
+          <div class="section-top-actions">
+            <div>
+              <h2 class="section-title">Gestión de Usuarios & Control de Roles</h2>
+              <p class="section-subtitle">
+                Supervisión de perfiles de acceso (Gerente, Cliente, Personal Limpieza, Encargado Mantenimiento), asignación de roles y suspensión preventiva.
+              </p>
+            </div>
+
+            <div class="filters-cluster">
+              <div class="search-input-wrap">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" id="user-search" placeholder="Buscar por nombre, correo o departamento..." oninput="searchUsuarios()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Filtro rápido de roles -->
+          <div class="role-filter-strip">
+            <button class="role-filter-chip active" data-role="ALL" onclick="filterUsuariosByRole('ALL')">
+              Todos (<span id="count-all-users">10</span>)
+            </button>
+            <button class="role-filter-chip" data-role="GERENTE" onclick="filterUsuariosByRole('GERENTE')">
+              Gerentes (<span id="count-gerentes">2</span>)
+            </button>
+            <button class="role-filter-chip" data-role="LIMPIEZA" onclick="filterUsuariosByRole('LIMPIEZA')">
+              Personal Limpieza (<span id="count-limpieza">3</span>)
+            </button>
+            <button class="role-filter-chip" data-role="MANTENIMIENTO" onclick="filterUsuariosByRole('MANTENIMIENTO')">
+              Encargados Mantenimiento (<span id="count-mantenimiento">3</span>)
+            </button>
+            <button class="role-filter-chip" data-role="CLIENTE" onclick="filterUsuariosByRole('CLIENTE')">
+              Clientes VIP (<span id="count-clientes">2</span>)
+            </button>
+          </div>
+
+          <!-- VISTA EN LISTA / TABLA PARA MONITOR DE USUARIOS -->
+          <div class="panel-card">
+            <div class="table-container">
+              <table class="luxury-table full-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>USUARIO & CONTACTO</th>
+                    <th>ROL & ÁREA ASIGNADA</th>
+                    <th>ESTADO</th>
+                    <th>ÚLTIMO ACCESO</th>
+                    <th class="text-right">ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody id="users-table-body">
+                  <!-- Renderizado dinámico en formato lista vía JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-footer-meta">
+              <span id="users-count-indicator">Mostrando 10 usuarios</span>
+              <div class="table-legend">
+                <span class="legend-dot active"></span> Usuario Activo
+                <span class="legend-dot danger"></span> Acceso Inhabilitado
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 4: CONSULTAR / GENERAR REPORTES            -->
+        <!-- Casos de Uso: Enviar Reporte, Consultar        -->
+        <!-- Historial de Reportes                          -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-reportes">
+          
+          <div class="section-top-actions">
+            <div>
+              <h2 class="section-title">Centro de Reportes & Auditoría</h2>
+              <p class="section-subtitle">
+                Generación de informes estratégicos, distribución ejecutiva por correo e historial de reportes certificados.
+              </p>
+            </div>
+
+            <button class="btn-primary-action" onclick="openReportModal()">
+              <i class="ph-bold ph-lightning"></i>
+              <span>Generar Nuevo Reporte</span>
+            </button>
+          </div>
+
+          <!-- Cards de Plantillas de Reportes -->
+          <div class="report-templates-grid">
+            
+            <div class="report-template-card" onclick="quickGenerateReport('Ocupación y Rendimiento Semanal')">
+              <div class="template-icon">
+                <i class="ph-bold ph-bed"></i>
+              </div>
+              <div class="template-info">
+                <h4>Ocupación Semanal & RevPAR</h4>
+                <p>Análisis de densidad de reservas por tipo de suite y proyección a 30 días.</p>
+              </div>
+              <div class="template-action">
+                <span class="btn-icon-link"><i class="ph ph-arrow-up-right"></i></span>
+              </div>
+            </div>
+
+            <div class="report-template-card" onclick="quickGenerateReport('Auditoría Financiera y Facturación')">
+              <div class="template-icon">
+                <i class="ph-bold ph-currency-dollar"></i>
+              </div>
+              <div class="template-info">
+                <h4>Ingresos & Transacciones</h4>
+                <p>Resumen de cobros por pasarela, depósitos de garantía y cancelaciones.</p>
+              </div>
+              <div class="template-action">
+                <span class="btn-icon-link"><i class="ph ph-arrow-up-right"></i></span>
+              </div>
+            </div>
+
+            <div class="report-template-card" onclick="quickGenerateReport('Rendimiento Operativo Limpieza y Mantenimiento')">
+              <div class="template-icon">
+                <i class="ph-bold ph-clock-counter-clockwise"></i>
+              </div>
+              <div class="template-info">
+                <h4>Tiempos de Servicio Operativo</h4>
+                <p>Auditoría de cumplimiento de aseo de habitaciones e incidencias técnicas resueltas.</p>
+              </div>
+              <div class="template-action">
+                <span class="btn-icon-link"><i class="ph ph-arrow-up-right"></i></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Tabla: Historial de Reportes -->
+          <div class="panel-card" style="margin-top: 2rem;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Historial de Reportes Generados</h3>
+                <p class="panel-subtitle">Archivo oficial de auditoría con trazabilidad de envíos</p>
+              </div>
+              <div class="search-input-wrap sm">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" id="report-search" placeholder="Filtrar reportes..." oninput="filterReports()">
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="luxury-table full-table">
+                <thead>
+                  <tr>
+                    <th>REF</th>
+                    <th>TÍTULO DEL REPORTE</th>
+                    <th>TIPO / CATEGORÍA</th>
+                    <th>FECHA EMISIÓN</th>
+                    <th>GENERADO POR</th>
+                    <th>ESTADO ENVÍO</th>
+                    <th class="text-right">ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody id="reports-table-body">
+                  <!-- Llenado dinámico vía JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODALES DE CASOS DE USO                        -->
+  <!-- ============================================== -->
+
+  <!-- MODAL: Cancelar Reserva Manualmente (Caso de Uso <<extend>>) -->
+  <div class="modal-backdrop" id="modal-cancel-reserva">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge danger">
+            <i class="ph-bold ph-warning-octagon"></i>
+          </div>
+          <div>
+            <h3 class="modal-title">Cancelar Reserva Manualmente</h3>
+            <span class="modal-subtitle">Caso de uso: Intervención gerencial extraordinaria</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modal-cancel-reserva')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="reservation-preview-box" id="cancel-modal-preview">
+          <!-- Datos inyectados vía JS -->
+        </div>
+
+        <form id="form-cancel-reserva" onsubmit="submitCancelReserva(event)">
+          <input type="hidden" id="cancel-reserva-id">
+          
+          <div class="form-group">
+            <label class="form-label" for="cancel-reason">Motivo de Cancelación Gerencial *</label>
+            <select class="form-control" id="cancel-reason" required>
+              <option value="">Seleccione el motivo formal...</option>
+              <option value="Fuerza Mayor / Incidente en Habitación">Fuerza Mayor / Incidente en Suite</option>
+              <option value="Solicitud Especial del Huésped (Directa)">Solicitud Especial del Huésped (Directa)</option>
+              <option value="Falta de Validación de Pago en Plazo">Falta de Pago en Plazo Límite</option>
+              <option value="Duplicidad de Reserva / Overbooking">Reasignación por Overbooking</option>
+              <option value="Decisión Gerencial Extraordinaria">Decisión Gerencial Extraordinaria</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cancel-notes">Observaciones para el Huésped y Auditoría *</label>
+            <textarea class="form-control" id="cancel-notes" rows="3" placeholder="Explique los pormenores de la cancelación..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="cancel-refund-check" checked>
+              <span>Aplicar Reembolso / Exoneración de Penalidad Gerencial (100%)</span>
+            </label>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-ghost" onclick="closeModal('modal-cancel-reserva')">Atrás</button>
+            <button type="submit" class="btn-danger-action">
+              <i class="ph-bold ph-trash"></i> Confirmar Cancelación
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Asignar Roles / Editar Usuario (Caso de Uso <<include>>) -->
+  <div class="modal-backdrop" id="modal-roles">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <i class="ph-bold ph-shield-star"></i>
+          </div>
+          <div>
+            <h3 class="modal-title">Asignar Roles & Permisos</h3>
+            <span class="modal-subtitle">Caso de uso: Asignar Roles a Usuarios SGH</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modal-roles')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="user-roles-preview" id="roles-modal-user-preview">
+          <!-- Inyectado vía JS -->
+        </div>
+
+        <form id="form-assign-role" onsubmit="submitAssignRole(event)">
+          <input type="hidden" id="role-user-id">
+          
+          <div class="form-group">
+            <label class="form-label">Seleccionar Rol en el Sistema SGH *</label>
+            <div class="role-cards-selector">
+              <label class="role-select-card">
+                <input type="radio" name="selected-role" value="GERENTE">
+                <div class="role-card-inner">
+                  <div class="role-icon"><i class="ph-bold ph-crown"></i></div>
+                  <div class="role-name">Gerente</div>
+                  <div class="role-desc">Acceso total a reportes, auditoría, asignación de roles y cancelaciones</div>
+                </div>
+              </label>
+
+              <label class="role-select-card">
+                <input type="radio" name="selected-role" value="LIMPIEZA">
+                <div class="role-card-inner">
+                  <div class="role-icon"><i class="ph-bold ph-sparkle"></i></div>
+                  <div class="role-name">Personal Limpieza</div>
+                  <div class="role-desc">Seleccionar habitación y notificar limpieza de suites</div>
+                </div>
+              </label>
+
+              <label class="role-select-card">
+                <input type="radio" name="selected-role" value="MANTENIMIENTO">
+                <div class="role-card-inner">
+                  <div class="role-icon"><i class="ph-bold ph-wrench"></i></div>
+                  <div class="role-name">Mantenimiento</div>
+                  <div class="role-desc">Acceso a reportes de fallas, aceptar órdenes e informes de reparación</div>
+                </div>
+              </label>
+
+              <label class="role-select-card">
+                <input type="radio" name="selected-role" value="CLIENTE">
+                <div class="role-card-inner">
+                  <div class="role-icon"><i class="ph-bold ph-user"></i></div>
+                  <div class="role-name">Cliente</div>
+                  <div class="role-desc">Reservar habitación, definir estadía y realizar pagos</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="role-department">Área / Departamento Asignado</label>
+            <input type="text" class="form-control" id="role-department" placeholder="Ej: Housekeeping Pisos 3 y 4 / Dirección Ejecutiva">
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-ghost" onclick="closeModal('modal-roles')">Cancelar</button>
+            <button type="submit" class="btn-primary-action">
+              <i class="ph-bold ph-check"></i> Guardar Asignación
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Generar y Enviar Reporte (Casos de Uso <<include>>) -->
+  <div class="modal-backdrop" id="modal-generate-report">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <i class="ph-bold ph-file-pdf"></i>
+          </div>
+          <div>
+            <h3 class="modal-title">Generar & Enviar Reporte</h3>
+            <span class="modal-subtitle">Casos de uso: Consultar/Generar Reporte & Enviar Reporte</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modal-generate-report')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="form-new-report" onsubmit="submitGenerateReport(event)">
+          <div class="form-group">
+            <label class="form-label" for="rep-title">Título del Reporte *</label>
+            <input type="text" class="form-control" id="rep-title" required placeholder="Ej: Reporte Ejecutivo de Desempeño y Ocupación">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label class="form-label" for="rep-category">Tipo de Reporte *</label>
+              <select class="form-control" id="rep-category" required>
+                <option value="Ocupación & Reservas">Ocupación & Reservas</option>
+                <option value="Financiero & Ingresos">Financiero & Ingresos</option>
+                <option value="Operaciones & Limpieza">Operaciones & Limpieza</option>
+                <option value="Mantenimiento & Incidencias">Mantenimiento & Incidencias</option>
+                <option value="Auditoría General SGH">Auditoría General SGH</option>
+              </select>
+            </div>
+            <div class="form-group col-half">
+              <label class="form-label" for="rep-period">Período Analizado</label>
+              <select class="form-control" id="rep-period">
+                <option value="Semana en Curso">Semana en Curso</option>
+                <option value="Mes Actual (Octubre 2026)">Mes Actual (Octubre 2026)</option>
+                <option value="Trimestre Q4 2026">Trimestre Q4 2026</option>
+                <option value="Anual Acumulado">Anual Acumulado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rep-recipient">Destinatarios de Envío (Caso de uso Enviar Reporte) *</label>
+            <input type="email" class="form-control" id="rep-recipient" value="directorio@grandsgh.com, auditoria@grandsgh.com" required>
+            <span class="field-hint">Los reportes enviados quedarán registrados con marca temporal en el historial.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rep-summary">Resumen Ejecutivo & Observaciones</label>
+            <textarea class="form-control" id="rep-summary" rows="3" placeholder="Anotaciones destacadas para el consejo directivo..."></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-ghost" onclick="closeModal('modal-generate-report')">Cancelar</button>
+            <button type="submit" class="btn-primary-action">
+              <i class="ph-bold ph-paper-plane-tilt"></i> Generar & Distribuir Reporte
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Auditoría Detallada de Reserva -->
+  <div class="modal-backdrop" id="modal-audit-reserva">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <i class="ph-bold ph-magnifying-glass-plus"></i>
+          </div>
+          <div>
+            <h3 class="modal-title">Auditoría Integral de Reserva</h3>
+            <span class="modal-subtitle">Trazabilidad completa de acciones y pagos</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modal-audit-reserva')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body" id="audit-modal-body">
+        <!-- Inyectado vía JS -->
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn-ghost" onclick="closeModal('modal-audit-reserva')">Cerrar</button>
+        <button type="button" class="btn-outline" id="btn-print-audit" onclick="printAudit()">
+          <i class="ph ph-printer"></i> Imprimir Ficha de Auditoría
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Script modular en carpeta /js -->
+  <script src="js/app.js?v=12"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<mxfile host="Electron" modified="2026-10-25T23:00:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="diag_gerente" name="Módulo Gerente">
+    <mxGraphModel dx="1100" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1050" pageHeight="680" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="box" value="Sistema de Gestión Hotelera (SGH) - Módulo Gerente" style="shape=rect;html=1;whiteSpace=wrap;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;dashed=0;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1e293b;align=left;spacingLeft=20;spacingTop=12;" parent="1" vertex="1">
+          <mxGeometry x="200" y="40" width="780" height="570" as="geometry"/>
+        </mxCell>
+        <mxCell id="act" value="Gerente" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ede9fe;strokeColor=#7c3aed;strokeWidth=1.5;fontStyle=1;fontSize=13;fontColor=#1e293b;" parent="1" vertex="1">
+          <mxGeometry x="70" y="270" width="45" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_gu" value="Gestionar Usuarios" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="90" width="150" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_ar" value="Asignar Roles" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontSize=12;fontColor=#334155;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="500" y="90" width="140" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_iu" value="Inhabilitar Usuario" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;strokeWidth=1.5;fontSize=12;fontColor=#78350f;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="740" y="90" width="140" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_gr" value="Gestionar Reservas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="260" width="150" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_aur" value="Auditar Reservas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontSize=12;fontColor=#334155;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="500" y="260" width="140" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_crm" value="Cancelar Reserva
+Manualmente" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;strokeWidth=1.5;fontSize=12;fontColor=#78350f;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="740" y="260" width="150" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_rep" value="Consultar / Generar
+Reporte" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="430" width="160" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_envr" value="Enviar Reporte" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontSize=12;fontColor=#334155;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="500" y="400" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cu_histr" value="Consultar Historial
+de Reportes" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontSize=12;fontColor=#334155;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="500" y="490" width="160" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_g1" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_gu">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_g2" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_gr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_g3" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_rep">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_ar" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#475569;fontSize=11;fontColor=#475569;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_gu" target="cu_ar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_iu" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#b45309;fontSize=11;fontColor=#b45309;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_iu" target="cu_ar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_aur" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#475569;fontSize=11;fontColor=#475569;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_gr" target="cu_aur">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_crm" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=1;strokeWidth=1.3;strokeColor=#b45309;fontSize=11;fontColor=#b45309;labelBackgroundColor=#ffffff;edgeStyle=orthogonalEdgeStyle;curved=1;" parent="1" edge="1" source="cu_crm" target="cu_gr">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="350"/>
+              <mxPoint x="380" y="350"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel_envr" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#475569;fontSize=11;fontColor=#475569;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_rep" target="cu_envr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_histr" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#475569;fontSize=11;fontColor=#475569;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_rep" target="cu_histr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,1 @@
+SGH, es un Sistema de Gestión de Hoteleria, se usaran 4 tipos de usuario: Gerente, Cliente, Personal de limpieza y Encargado en mantenimiento. Cada uno con su interfaz y casos de uso en el sistema. 
