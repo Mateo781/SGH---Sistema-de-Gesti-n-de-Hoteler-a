@@ -15,7 +15,7 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
   <!-- Hoja de estilos en carpeta /css -->
-  <link rel="stylesheet" href="css/styles.css?v=12">
+  <link rel="stylesheet" href="css/styles.css?v=14">
 </head>
 <body>
   <div class="app-layout">
@@ -52,6 +52,9 @@
             <i class="ph-fill ph-crown"></i> Gerente General
           </span>
         </div>
+        <a href="login.html" class="user-logout-btn" title="Cerrar sesión / Cambiar de cuenta">
+          <i class="ph ph-sign-out"></i>
+        </a>
       </div>
 
       <!-- Navegación alineada estrictamente con los Casos de Uso del Gerente -->
@@ -82,15 +85,15 @@
 
         <span class="nav-section-label" style="margin-top: 1.25rem;">ECOSISTEMA SGH</span>
         <div class="ecosystem-shortcuts">
-          <div class="eco-pill" title="Portal Cliente en preparación">
-            <i class="ph ph-user"></i> Cliente
-          </div>
+          <a href="cliente.html" class="eco-pill" style="text-decoration: none; cursor: pointer; color: #93c5fd; border-color: rgba(147, 197, 253, 0.35); background: rgba(30, 58, 138, 0.25);" title="Ingresar al Portal del Cliente VIP">
+            <i class="ph-fill ph-user-circle"></i> Portal Cliente VIP
+          </a>
           <div class="eco-pill" title="Portal Personal de Limpieza en preparación">
             <i class="ph ph-sparkle"></i> Personal Limpieza
           </div>
-          <div class="eco-pill" title="Portal Mantenimiento en preparación">
-            <i class="ph ph-wrench"></i> Mantenimiento
-          </div>
+          <a href="mantenimiento.html" class="eco-pill" style="text-decoration: none; cursor: pointer; color: #fde68a; border-color: rgba(245, 158, 11, 0.35); background: rgba(180, 83, 9, 0.25);" title="Ingresar al Portal del Encargado de Mantenimiento">
+            <i class="ph-fill ph-wrench"></i> Mantenimiento Técnico
+          </a>
         </div>
       </nav>
 

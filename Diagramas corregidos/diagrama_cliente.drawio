@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<mxfile host="Electron" modified="2026-11-01T20:20:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="diag_cliente_corregido" name="Módulo Cliente - Corregido">
+    <mxGraphModel dx="1100" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="980" pageHeight="560" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Contenedor del Sistema -->
+        <mxCell id="box" value="Sistema de Gestión Hotelera (SGH) - Módulo Cliente (Corregido)" style="shape=rect;html=1;whiteSpace=wrap;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;dashed=0;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1e293b;align=left;spacingLeft=20;spacingTop=12;" parent="1" vertex="1">
+          <mxGeometry x="200" y="40" width="720" height="460" as="geometry"/>
+        </mxCell>
+        
+        <!-- Actor Cliente -->
+        <mxCell id="act" value="Cliente" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ede9fe;strokeColor=#7c3aed;strokeWidth=1.5;fontStyle=1;fontSize=13;fontColor=#1e293b;" parent="1" vertex="1">
+          <mxGeometry x="70" y="210" width="45" height="90" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso: Consultar Disponibilidad -->
+        <mxCell id="cu_disp" value="Consultar Disponibilidad&#xa;de Habitaciones" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="90" width="170" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso: Realizar Reserva -->
+        <mxCell id="cu_res" value="Realizar Reserva" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="215" width="170" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso Incluido: Procesar Pago -->
+        <mxCell id="cu_pago" value="Procesar Pago" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontSize=12;fontColor=#334155;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="530" y="215" width="150" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso: Consultar Mis Reservas -->
+        <mxCell id="cu_misres" value="Consultar Mis&#xa;Reservas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="345" width="170" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso Extendido: Cancelar Reserva -->
+        <mxCell id="cu_cres" value="Cancelar Reserva" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;strokeWidth=1.5;fontSize=12;fontColor=#78350f;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="530" y="345" width="150" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relaciones Actor - Casos de Uso -->
+        <mxCell id="rel_act_disp" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_disp">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="rel_act_res" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_res">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="rel_act_misres" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_misres">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relación <<include>>: Realizar Reserva -> Procesar Pago -->
+        <mxCell id="rel_pago" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#475569;fontSize=11;fontColor=#475569;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_res" target="cu_pago">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relación <<extend>>: Cancelar Reserva -> Consultar Mis Reservas -->
+        <mxCell id="rel_cres" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#b45309;fontSize=11;fontColor=#b45309;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_cres" target="cu_misres">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

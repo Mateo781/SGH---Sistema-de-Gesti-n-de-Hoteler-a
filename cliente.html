@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGH | Portal de Huéspedes & Suites VIP — Grand SGH</title>
+  <meta name="description" content="Portal oficial de reservas de suites exclusivas y gestión de estancias para clientes VIP de Grand SGH Luxury Residences & Hotel.">
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Modern Executive Interface) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Hoja de estilos del portal cliente y auth tokens -->
+  <link rel="stylesheet" href="css/auth.css?v=2">
+  <link rel="stylesheet" href="css/cliente.css?v=2">
+</head>
+<body>
+
+  <!-- ====================================================================== -->
+  <!-- NAVBAR SUPERIOR DEL CLIENTE (TRANSPARENTE BLUR & ORO)                  -->
+  <!-- ====================================================================== -->
+  <header class="client-navbar">
+    
+    <div class="brand-section">
+      <div class="brand-crest-gold">
+        <i class="ph-bold ph-buildings"></i>
+      </div>
+      <div class="brand-names">
+        <span class="brand-title">GRAND SGH</span>
+        <span class="brand-subtitle">PORTAL CLIENTE VIP</span>
+      </div>
+    </div>
+
+    <!-- Navegación central por Casos de Uso del Cliente -->
+    <nav class="client-nav-links">
+      <button class="client-nav-btn active" data-target="section-catalogo" id="nav-btn-catalogo">
+        <i class="ph-bold ph-bed"></i>
+        <span>Explorar Suites</span>
+      </button>
+
+      <button class="client-nav-btn" data-target="section-mis-reservas" id="nav-btn-reservas">
+        <i class="ph-bold ph-calendar-check"></i>
+        <span>Mis Reservas</span>
+        <span class="nav-badge-pill" id="badge-mis-reservas">1</span>
+      </button>
+
+      <button class="client-nav-btn" data-target="section-experiencias" id="nav-btn-experiencias">
+        <i class="ph-bold ph-sparkle"></i>
+        <span>Concierge & Spa</span>
+      </button>
+    </nav>
+
+    <!-- Perfil del Huésped Activo & Enlaces a otros portales -->
+    <div class="guest-top-actions">
+      <div class="guest-profile-chip" title="Sesión activa como Huésped VIP">
+        <div class="guest-avatar">ER</div>
+        <div class="guest-meta">
+          <span class="guest-name">Dra. Elena Rostova</span>
+          <span class="guest-status-tag">
+            <i class="ph-fill ph-crown"></i> Huésped VIP Elite
+          </span>
+        </div>
+      </div>
+
+      <a href="index.html" class="btn-nav-portal" title="Cambiar a la consola de gerencia">
+        <i class="ph ph-sliders-horizontal"></i>
+        <span>Gerencia</span>
+      </a>
+
+      <a href="mantenimiento.html" class="btn-nav-portal" title="Ver portal de mantenimiento técnico">
+        <i class="ph ph-wrench"></i>
+        <span>Mantenimiento</span>
+      </a>
+
+      <a href="login.html" class="btn-nav-portal" title="Cerrar sesión">
+        <i class="ph ph-sign-out"></i>
+      </a>
+    </div>
+
+  </header>
+
+  <!-- ====================================================================== -->
+  <!-- HERO BANNER EDITORIAL (LUJO & SOFISTICACIÓN)                           -->
+  <!-- ====================================================================== -->
+  <section class="client-hero-banner">
+    <div class="hero-inner-wrap">
+      <div class="hero-crest-badge">
+        <i class="ph-fill ph-shield-check"></i> Experiencias Residenciales Exclusivas
+      </div>
+      <h1 class="hero-main-title">
+        Su santuario de serenidad y <em>elegancia atemporal</em>.
+      </h1>
+      <p class="hero-lead-text">
+        Bienvenida a Grand SGH, Dra. Rostova. Seleccione entre nuestras suites privadas con servicio de mayordomo las 24 horas, terrazas panorámicas y privacidad absoluta.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================== -->
+  <!-- MOTOR DE DISPONIBILIDAD (CU: Consultar Disponibilidad)                 -->
+  <!-- ====================================================================== -->
+  <div class="availability-search-bar" id="search-bar-widget">
+    
+    <div class="search-field">
+      <label class="field-label" for="search-checkin">Fecha Check-in</label>
+      <div class="field-input-box">
+        <i class="ph ph-calendar-blank"></i>
+        <input type="date" id="search-checkin" value="2026-11-05">
+      </div>
+    </div>
+
+    <div class="search-field">
+      <label class="field-label" for="search-checkout">Fecha Check-out</label>
+      <div class="field-input-box">
+        <i class="ph ph-calendar-check"></i>
+        <input type="date" id="search-checkout" value="2026-11-10">
+      </div>
+    </div>
+
+    <div class="search-field">
+      <label class="field-label" for="search-guests">Huéspedes</label>
+      <div class="field-input-box">
+        <i class="ph ph-users"></i>
+        <select id="search-guests">
+          <option value="1">1 Huésped</option>
+          <option value="2" selected>2 Huéspedes</option>
+          <option value="3">3 Huéspedes</option>
+          <option value="4">4+ Huéspedes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="search-field">
+      <label class="field-label" for="search-category">Categoría Suite</label>
+      <div class="field-input-box">
+        <i class="ph ph-crown"></i>
+        <select id="search-category">
+          <option value="ALL">Todas las Categorías</option>
+          <option value="Royal">Royal Master Suite</option>
+          <option value="Executive">Executive Corner</option>
+          <option value="Family">Deluxe Family Suite</option>
+          <option value="Premium">Premium King Room</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" class="btn-search-suites" id="btn-search-availability">
+      <i class="ph-bold ph-magnifying-glass"></i>
+      <span>Consultar Disponibilidad</span>
+    </button>
+
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- CONTENIDO PRINCIPAL POR PESTAÑAS (CASOS DE USO)                        -->
+  <!-- ====================================================================== -->
+  <main class="client-main-container">
+
+    <!-- -------------------------------------------------------------------- -->
+    <!-- SECCIÓN 1: CATÁLOGO DE SUITES (CU: Consultar Disponibilidad)          -->
+    <!-- -------------------------------------------------------------------- -->
+    <section class="client-section active" id="section-catalogo">
+      <div class="section-head-row">
+        <div>
+          <h2 class="section-title-serif">Suites & Residencias Disponibles</h2>
+          <p class="section-subtitle-muted">
+            Inventario en tiempo real con confirmación inmediata y tarifa garantizada.
+          </p>
+        </div>
+        <div style="font-size: 0.82rem; color: var(--navy-700); font-weight: 700;">
+          <i class="ph-fill ph-sparkle"></i> Mejor Tarifa Garantizada Directa
+        </div>
+      </div>
+
+      <!-- Cuadrícula dinámica de Suites -->
+      <div class="suites-grid" id="suites-catalog-grid">
+        <!-- Renderizado dinámico vía js/cliente.js -->
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------------- -->
+    <!-- SECCIÓN 2: MIS RESERVAS (CU: Consultar Mis Reservas & Cancelar)       -->
+    <!-- -------------------------------------------------------------------- -->
+    <section class="client-section" id="section-mis-reservas">
+      <div class="section-head-row">
+        <div>
+          <h2 class="section-title-serif">Mis Reservas & Estancias</h2>
+          <p class="section-subtitle-muted">
+            Supervisión de sus reservas activas, descarga de vouchers y gestión de cancelaciones sin penalización.
+          </p>
+        </div>
+        <button class="btn-book-suite" onclick="switchClientSection('section-catalogo')">
+          <i class="ph-bold ph-plus"></i>
+          <span>Nueva Reserva</span>
+        </button>
+      </div>
+
+      <!-- Lista de Reservas del Huésped -->
+      <div class="reservas-client-list" id="client-reservas-list">
+        <!-- Renderizado dinámico vía js/cliente.js -->
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------------- -->
+    <!-- SECCIÓN 3: EXPERIENCIAS & CONCIERGE SGH                               -->
+    <!-- -------------------------------------------------------------------- -->
+    <section class="client-section" id="section-experiencias">
+      <div class="section-head-row">
+        <div>
+          <h2 class="section-title-serif">Servicios Exclusivos de Concierge</h2>
+          <p class="section-subtitle-muted">
+            Complemente su estancia con nuestras amenidades de clase mundial.
+          </p>
+        </div>
+      </div>
+
+      <div class="suites-grid">
+        
+        <article class="suite-card">
+          <div class="suite-card-image-wrap">
+            <img src="img/grand_sgh_facade.jpg" alt="Spa SGH" class="suite-card-image">
+            <span class="suite-badge-floating gold"><i class="ph-bold ph-sparkle"></i> Wellness de Autor</span>
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span style="font-size:0.75rem; font-weight:700; color:var(--accent-gold); text-transform:uppercase;">BIENESTAR PRIVADO</span>
+              <h3 class="suite-title">The Royal Spa & Baños Termales</h3>
+              <p class="suite-description">Circuitos hidrotermales privados, masajes bioenergéticos y rituales de relajación aromática en cabinas VIP con vista al lago.</p>
+            </div>
+            <button class="btn-book-suite" onclick="alert('Solicitud de reserva de Spa enviada al Concierge VIP.')">
+              <i class="ph-bold ph-calendar-plus"></i>
+              <span>Agendar Sesión Privada</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="suite-card">
+          <div class="suite-card-image-wrap">
+            <img src="img/suite_embajador.jpg" alt="Gastronomía SGH" class="suite-card-image">
+            <span class="suite-badge-floating"><i class="ph-bold ph-wine"></i> Michelin Excellence</span>
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span style="font-size:0.75rem; font-weight:700; color:var(--accent-gold); text-transform:uppercase;">ALTA COCINA</span>
+              <h3 class="suite-title">Catering Privado & Cava Sommelier</h3>
+              <p class="suite-description">Degustaciones personalizadas diseñadas por nuestro Chef Ejecutivo directo a su suite o en la terraza panorámica.</p>
+            </div>
+            <button class="btn-book-suite" onclick="alert('Solicitud de menú degustación enviada a Mayordomía.')">
+              <i class="ph-bold ph-fork-knife"></i>
+              <span>Solicitar Cena a la Suite</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================== -->
+  <!-- MODAL: REALIZAR RESERVA & PAGO SEGURO                                  -->
+  <!-- Casos de Uso: Realizar Reserva (<<include>> Procesar Pago)             -->
+  <!-- ====================================================================== -->
+  <div class="booking-modal-overlay" id="booking-modal">
+    <div class="booking-modal-card">
+      
+      <div class="booking-modal-header">
+        <div class="modal-header-brand">
+          <div style="font-size: 1.4rem; color: #fde68a;"><i class="ph-fill ph-shield-check"></i></div>
+          <div>
+            <h3 style="font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; color:#fff;">Confirmación de Reserva & Pago Seguro</h3>
+            <span style="font-size: 0.72rem; color: #93c5fd; letter-spacing: 0.08em; text-transform: uppercase;">Transacción Certificada SGH Hospitality</span>
+          </div>
+        </div>
+        <button type="button" class="modal-close-cross" id="btn-close-booking-modal" aria-label="Cerrar">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="booking-modal-body">
+        
+        <!-- Columna Izquierda: Parámetros de la Estadía y Pasarela -->
+        <form class="booking-form-col" id="form-booking-checkout">
+          
+          <div>
+            <div class="form-step-title">
+              <i class="ph-bold ph-calendar"></i> 1. Fechas & Huéspedes de la Estadía
+            </div>
+            <div class="modal-input-grid">
+              <div class="modal-form-group">
+                <label class="modal-label" for="booking-checkin">Fecha Check-in</label>
+                <input type="date" id="booking-checkin" class="modal-input" required>
+              </div>
+              <div class="modal-form-group">
+                <label class="modal-label" for="booking-checkout">Fecha Check-out</label>
+                <input type="date" id="booking-checkout" class="modal-input" required>
+              </div>
+            </div>
+
+            <div class="modal-form-group" style="margin-top: 0.75rem;">
+              <label class="modal-label" for="booking-guests">Número de Huéspedes</label>
+              <select id="booking-guests" class="modal-input">
+                <option value="1">1 Huésped</option>
+                <option value="2" selected>2 Huéspedes</option>
+                <option value="3">3 Huéspedes</option>
+                <option value="4">4 Huéspedes</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-step-title">
+              <i class="ph-bold ph-credit-card"></i> 2. Pasarela de Pago Seguro (<<include>>)
+            </div>
+
+            <div class="payment-methods-strip">
+              <button type="button" class="pay-card-pill active">
+                <i class="ph-bold ph-credit-card"></i> Tarjeta VIP
+              </button>
+              <button type="button" class="pay-card-pill">
+                <i class="ph-bold ph-bank"></i> Concierge
+              </button>
+              <button type="button" class="pay-card-pill">
+                <i class="ph-bold ph-currency-dollar"></i> Transferencia
+              </button>
+            </div>
+
+            <div class="modal-form-group" style="margin-top: 0.85rem;">
+              <label class="modal-label" for="card-number">Número de Tarjeta</label>
+              <input type="text" id="card-number" class="modal-input" value="4532 •••• •••• 4920" required>
+            </div>
+
+            <div class="modal-input-grid" style="margin-top: 0.65rem;">
+              <div class="modal-form-group">
+                <label class="modal-label" for="card-exp">Vencimiento</label>
+                <input type="text" id="card-exp" class="modal-input" value="09/29" required>
+              </div>
+              <div class="modal-form-group">
+                <label class="modal-label" for="card-cvv">CVV de Seguridad</label>
+                <input type="password" id="card-cvv" class="modal-input" value="842" required>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-confirm-payment" id="btn-confirm-payment">
+            <i class="ph-bold ph-lock-key"></i>
+            <span>Confirmar y Pagar <span id="btn-payment-amount">$0</span></span>
+          </button>
+
+        </form>
+
+        <!-- Columna Derecha: Resumen de Suite & Liquidación -->
+        <div class="booking-summary-col">
+          <div>
+            <img src="img/suite_embajador.jpg" alt="Suite Preview" class="summary-suite-thumb" id="modal-suite-img">
+            <h4 class="summary-suite-title" id="modal-suite-title">Suite Embajador</h4>
+            <div class="summary-suite-cat" id="modal-suite-cat">SUITE 404 · Executive Corner Suite</div>
+
+            <div class="price-breakdown-list">
+              <div class="breakdown-row">
+                <span>Tarifa por noche</span>
+                <strong id="modal-price-night">$1,300</strong>
+              </div>
+              <div class="breakdown-row">
+                <span>Duración estancia</span>
+                <strong id="calc-nights-count">5 noches</strong>
+              </div>
+              <div class="breakdown-row">
+                <span>Subtotal hospedaje</span>
+                <span id="calc-subtotal-val">$6,500</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Cargos de servicio VIP (10%)</span>
+                <span id="calc-service-val">$650</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Impuestos de hospitalidad (8%)</span>
+                <span id="calc-tax-val">$520</span>
+              </div>
+              <div class="breakdown-row total">
+                <span>TOTAL A PAGAR</span>
+                <span id="calc-total-val" style="color:var(--navy-900);">$7,670</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.45; text-align: center;">
+            <i class="ph-fill ph-shield-check" style="color: var(--status-success);"></i>
+            Política de Cancelación Flexible: Reembolso íntegro garantizado hasta 24 horas antes del check-in.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Script del Portal Cliente -->
+  <script src="js/cliente.js?v=2"></script>
+</body>
+</html>

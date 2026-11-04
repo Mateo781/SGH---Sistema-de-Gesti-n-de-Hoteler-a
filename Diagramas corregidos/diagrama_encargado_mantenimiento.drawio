@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<mxfile host="Electron" modified="2026-11-01T20:20:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="diag_mantenimiento_corregido" name="Módulo Encargado de Mantenimiento - Corregido">
+    <mxGraphModel dx="1100" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1050" pageHeight="600" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Contenedor del Sistema -->
+        <mxCell id="box" value="Sistema de Gestión Hotelera (SGH) - Módulo Encargado de Mantenimiento (Corregido)" style="shape=rect;html=1;whiteSpace=wrap;fillColor=#f8fafc;strokeColor=#475569;strokeWidth=2;dashed=0;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1e293b;align=left;spacingLeft=20;spacingTop=12;" parent="1" vertex="1">
+          <mxGeometry x="200" y="40" width="800" height="510" as="geometry"/>
+        </mxCell>
+        
+        <!-- Actor Encargado de Mantenimiento -->
+        <mxCell id="act" value="Encargado de&#xa;Mantenimiento" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ede9fe;strokeColor=#7c3aed;strokeWidth=1.5;fontStyle=1;fontSize=13;fontColor=#1e293b;" parent="1" vertex="1">
+          <mxGeometry x="70" y="230" width="45" height="90" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso: Consultar Reportes de Averías -->
+        <mxCell id="cu_cons" value="Consultar Reportes&#xa;de Averías / Incidencias" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="90" width="180" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso: Registrar Atención de Reparación -->
+        <mxCell id="cu_atend" value="Registrar Atención&#xa;de Reparación" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="240" width="180" height="70" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso Incluido: Realizar Informe Técnico -->
+        <mxCell id="cu_inf" value="Realizar Informe&#xa;Técnico" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontSize=12;fontColor=#334155;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="170" width="165" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso Incluido: Notificar Reparación Finalizada -->
+        <mxCell id="cu_not" value="Notificar Habitación&#xa;Reparada" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1.5;fontSize=12;fontColor=#334155;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="260" width="165" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso Extendido: Cancelar / Posponer Reparación -->
+        <mxCell id="cu_canc" value="Cancelar / Posponer&#xa;Reparación" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;strokeWidth=1.5;fontSize=12;fontColor=#78350f;fontStyle=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="540" y="355" width="165" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Caso de Uso: Consultar Historial de Mantenimientos -->
+        <mxCell id="cu_hist" value="Consultar Historial de&#xa;Mantenimientos" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.8;fontSize=12;fontColor=#1e3a8a;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="260" y="430" width="180" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relaciones Actor - Casos de Uso -->
+        <mxCell id="rel_act_cons" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_cons">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="rel_act_atend" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_atend">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="rel_act_hist" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=1.5;strokeColor=#1e293b;" parent="1" edge="1" source="act" target="cu_hist">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relaciones <<include>> desde Registrar Atención -->
+        <mxCell id="rel_inf" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#475569;fontSize=11;fontColor=#475569;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_atend" target="cu_inf">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="rel_not" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#475569;fontSize=11;fontColor=#475569;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_atend" target="cu_not">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relación <<extend>>: Cancelar Reparación -> Registrar Atención -->
+        <mxCell id="rel_canc" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="dashed=1;endArrow=open;endSize=8;html=1;rounded=0;strokeWidth=1.3;strokeColor=#b45309;fontSize=11;fontColor=#b45309;labelBackgroundColor=#ffffff;" parent="1" edge="1" source="cu_canc" target="cu_atend">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

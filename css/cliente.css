@@ -1,0 +1,1286 @@
+/* ==========================================================================
+   SGH - SISTEMA DE GESTIÓN HOTELERA | PORTAL DEL CLIENTE (GUEST & VIP LOUNGE)
+   Aesthetic Direction: High-End Riviera Executive Navy & Alabaster White
+   Typography: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Precision UI)
+   Casos de Uso: Consultar Disponibilidad, Realizar Reserva (<<include>> Pago),
+   Consultar Mis Reservas (<<extend>> Cancelar Reserva)
+   ========================================================================== */
+
+:root {
+  --navy-950: #050d1a;
+  --navy-900: #0a192f;
+  --navy-850: #0f2442;
+  --navy-800: #162f55;
+  --navy-700: #1e3a8a;
+  --navy-600: #2563eb;
+  --navy-500: #3b82f6;
+  --navy-100: #e0e7ff;
+  --navy-50: #eef2ff;
+
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-muted: #e2e8f0;
+
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-navy: rgba(15, 36, 66, 0.15);
+  --border-focus: #1e3a8a;
+
+  --text-primary: #0a192f;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --text-white: #ffffff;
+
+  --accent-gold: #b45309;
+  --accent-gold-hover: #92400e;
+  --accent-gold-bg: #fef3c7;
+  --accent-gold-border: #fde68a;
+
+  --status-success: #059669;
+  --status-success-bg: #ecfdf5;
+  --status-warning: #d97706;
+  --status-warning-bg: #fffbeb;
+  --status-danger: #dc2626;
+  --status-danger-bg: #fef2f2;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-sm: 0 1px 3px rgba(10, 25, 47, 0.05);
+  --shadow-md: 0 4px 14px rgba(10, 25, 47, 0.08);
+  --shadow-lg: 0 16px 36px rgba(10, 25, 47, 0.12);
+  --shadow-navy: 0 10px 30px rgba(10, 25, 47, 0.25);
+
+  --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   HEADER DE NAVEGACIÓN SUPERIOR (ALABASTRO & ORO DISCRETO)
+   ========================================================================== */
+.client-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 0 2.5rem;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-crest-gold {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fde68a;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.2);
+}
+
+.brand-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--navy-900);
+  line-height: 1.1;
+}
+
+.brand-subtitle {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Menú Central de Pestañas */
+.client-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-subtle);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.client-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.client-nav-btn:hover {
+  color: var(--navy-900);
+}
+
+.client-nav-btn.active {
+  background: #ffffff;
+  color: var(--navy-900);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(10, 25, 47, 0.08);
+}
+
+.client-nav-btn i {
+  font-size: 1.15rem;
+  color: var(--navy-700);
+}
+
+.nav-badge-pill {
+  padding: 0.12rem 0.45rem;
+  background: var(--navy-900);
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+/* Perfil del Huésped a la derecha */
+.guest-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.guest-profile-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.5rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 30px;
+}
+
+.guest-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border: 2px solid #ffffff;
+}
+
+.guest-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  line-height: 1.1;
+}
+
+.guest-status-tag {
+  font-size: 0.65rem;
+  color: var(--accent-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-nav-portal {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--border-medium);
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  color: var(--navy-800);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-nav-portal:hover {
+  background: var(--bg-subtle);
+  color: var(--navy-900);
+  border-color: var(--navy-700);
+}
+
+/* ==========================================================================
+   HERO BANNER DEL CLIENTE (HOSPITALIDAD & PRIVACIDAD)
+   ========================================================================== */
+.client-hero-banner {
+  position: relative;
+  background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 50%, var(--navy-800) 100%);
+  color: #ffffff;
+  padding: 3.5rem 3rem 4rem 3rem;
+  overflow: hidden;
+}
+
+.client-hero-banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 45%;
+  background-image: url('../img/grand_sgh_facade.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  mask-image: linear-gradient(to right, transparent, black);
+  -webkit-mask-image: linear-gradient(to right, transparent, black);
+  pointer-events: none;
+}
+
+.hero-inner-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-crest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(217, 119, 6, 0.15);
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  border-radius: 20px;
+  color: #fde68a;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+
+.hero-main-title {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.12;
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+}
+
+.hero-main-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: #93c5fd;
+}
+
+.hero-lead-text {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  max-width: 650px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   MOTOR DE BÚSQUEDA DE DISPONIBILIDAD (STICKY FLOATING BAR)
+   ========================================================================== */
+.availability-search-bar {
+  max-width: 1200px;
+  margin: -2.5rem auto 2.5rem auto;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.75rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1fr 1.2fr auto;
+  gap: 1.25rem;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.field-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.field-input-box {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.field-input-box:focus-within {
+  border-color: var(--navy-700);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+.field-input-box i {
+  color: var(--navy-700);
+  font-size: 1.15rem;
+}
+
+.field-input-box input, 
+.field-input-box select {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy-900);
+  outline: none;
+}
+
+.btn-search-suites {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.65rem;
+  background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+  color: #ffffff;
+  border: 1px solid var(--navy-950);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  height: 100%;
+  white-space: nowrap;
+}
+
+.btn-search-suites:hover {
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-navy);
+}
+
+/* ==========================================================================
+   CONTENEDOR DE CONTENIDO & SECCIONES PRINCIPALES
+   ========================================================================== */
+.client-main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem 1.5rem;
+}
+
+.client-section {
+  display: none;
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+.client-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.section-title-serif {
+  font-family: var(--font-serif);
+  font-size: 2.35rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  line-height: 1.15;
+}
+
+.section-subtitle-muted {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+/* ==========================================================================
+   CATÁLOGO DE SUITES & DISPONIBILIDAD (CU: Consultar Disponibilidad)
+   ========================================================================== */
+.suites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.suite-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.suite-card:hover {
+  border-color: var(--navy-500);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.suite-card-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  background-color: var(--navy-950);
+}
+
+.suite-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.suite-card:hover .suite-card-image {
+  transform: scale(1.05);
+}
+
+.suite-badge-floating {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.35rem 0.8rem;
+  background: rgba(10, 25, 47, 0.75);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.suite-badge-floating.gold {
+  background: rgba(180, 83, 9, 0.85);
+  color: #fef3c7;
+  border-color: rgba(253, 230, 138, 0.4);
+}
+
+.suite-price-pill {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.suite-price-val {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.suite-price-period {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.suite-card-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.suite-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  line-height: 1.2;
+  margin-bottom: 0.45rem;
+}
+
+.suite-description {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.suite-amenities-strip {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.amenity-item i {
+  color: var(--navy-700);
+  font-size: 1.1rem;
+}
+
+.suite-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.availability-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--status-success);
+}
+
+.dot-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--status-success);
+}
+
+.btn-book-suite {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.45rem;
+  background: var(--navy-900);
+  color: #ffffff;
+  border: 1px solid var(--navy-950);
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-book-suite:hover {
+  background: var(--navy-700);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================================================
+   MIS RESERVAS (CU: Consultar Mis Reservas & Cancelar Reserva)
+   ========================================================================== */
+.reservas-client-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.client-reserva-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 280px 1fr auto;
+  transition: var(--transition);
+}
+
+.client-reserva-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.reserva-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 210px;
+}
+
+.reserva-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reserva-photo-code {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.25rem 0.65rem;
+  background: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.reserva-details-wrap {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.reserva-status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-reserva-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.badge-reserva-state.confirmed {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+  border: 1px solid #a7f3d0;
+}
+
+.badge-reserva-state.cancelled {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  border: 1px solid #fecaca;
+}
+
+.reserva-suite-name {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  margin-bottom: 0.25rem;
+}
+
+.reserva-dates-info {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.reserva-specs-strip {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.reserva-actions-column {
+  padding: 1.75rem;
+  background: #fbfcfd;
+  border-left: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.75rem;
+  min-width: 220px;
+}
+
+.reserva-total-box {
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+
+.reserva-total-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.reserva-total-val {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.btn-voucher-action {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.15rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy-800);
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-voucher-action:hover {
+  background: var(--navy-50);
+  border-color: var(--navy-700);
+  color: var(--navy-900);
+}
+
+.btn-cancel-reservation {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.15rem;
+  background: transparent;
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--status-danger);
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-cancel-reservation:hover {
+  background: var(--status-danger-bg);
+  border-color: var(--status-danger);
+}
+
+/* ==========================================================================
+   MODAL DE RESERVA & PAGO SEGURO (CU: Realizar Reserva <<include>> Pago)
+   ========================================================================== */
+.booking-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 25, 47, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.booking-modal-overlay.active {
+  display: flex;
+}
+
+.booking-modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-navy);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-modal-header {
+  padding: 1.75rem 2rem;
+  background: var(--navy-900);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+}
+
+.modal-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.modal-close-cross {
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.35rem;
+  transition: var(--transition);
+}
+
+.modal-close-cross:hover {
+  color: #ffffff;
+}
+
+.booking-modal-body {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 2rem;
+}
+
+/* Columna Izquierda: Parámetros & Pago */
+.booking-form-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-step-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--navy-700);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.modal-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.modal-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--navy-900);
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--navy-900);
+  background: var(--bg-surface);
+  outline: none;
+}
+
+.modal-input:focus {
+  border-color: var(--navy-700);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* Métodos de Pago Card Selection */
+.payment-methods-strip {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.pay-card-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem;
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--navy-800);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pay-card-pill.active {
+  border-color: var(--navy-700);
+  background: var(--navy-50);
+  color: var(--navy-900);
+}
+
+/* Columna Derecha: Resumen de Suite & Desglose Financiero */
+.booking-summary-col {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.summary-suite-thumb {
+  width: 100%;
+  height: 150px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.summary-suite-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.summary-suite-cat {
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.price-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--border-medium);
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.breakdown-row.total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  padding-top: 0.25rem;
+}
+
+.btn-confirm-payment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.95rem;
+  background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+  color: #ffffff;
+  border: 1px solid var(--navy-950);
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-confirm-payment:hover {
+  background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-navy);
+}
+
+/* ==========================================================================
+   MODAL DE CONFIRMACIÓN DE CANCELACIÓN (CU: Cancelar Reserva)
+   ========================================================================== */
+.cancel-modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .availability-search-bar {
+    grid-template-columns: 1fr 1fr;
+    margin: -1.75rem 1.25rem 2rem 1.25rem;
+  }
+  .btn-search-suites {
+    grid-column: span 2;
+    height: 48px;
+  }
+  .suites-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .client-reserva-card {
+    grid-template-columns: 1fr;
+  }
+  .reserva-photo-wrap {
+    height: 220px;
+    min-height: auto;
+  }
+  .reserva-actions-column {
+    border-left: none;
+    border-top: 1px solid var(--border-light);
+    width: 100%;
+    min-width: 0;
+    align-items: stretch;
+    padding: 1.35rem;
+  }
+  .reserva-total-box {
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .client-navbar {
+    padding: 0.85rem 1.25rem;
+    height: auto;
+    flex-direction: column;
+    gap: 0.85rem;
+    align-items: stretch;
+  }
+  .brand-section {
+    justify-content: space-between;
+  }
+  .client-nav-links {
+    width: 100%;
+    justify-content: center;
+  }
+  .guest-top-actions {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .section-head-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-title-serif {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .client-hero-banner {
+    padding: 2.25rem 1.25rem 3rem 1.25rem;
+  }
+  .hero-main-title {
+    font-size: clamp(1.75rem, 6vw, 2.35rem);
+  }
+  .hero-lead-text {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .client-main-container {
+    padding: 0 1rem 4rem 1rem;
+  }
+  .suite-card-body {
+    padding: 1.25rem;
+  }
+  .suite-title {
+    font-size: 1.45rem;
+  }
+  .suite-amenities-strip {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .suite-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+  .btn-book-suite {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+  .booking-modal-overlay {
+    padding: 0.75rem;
+  }
+  .booking-modal-card {
+    border-radius: var(--radius-lg);
+    max-height: 94vh;
+  }
+  .booking-modal-header {
+    padding: 1.15rem 1.25rem;
+    border-top-left-radius: var(--radius-lg);
+    border-top-right-radius: var(--radius-lg);
+  }
+  .booking-modal-body {
+    padding: 1.25rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .modal-input-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .btn-confirm-payment {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .availability-search-bar {
+    grid-template-columns: 1fr;
+    margin: -1.25rem 1rem 1.75rem 1rem;
+    padding: 1.15rem;
+    gap: 0.75rem;
+  }
+  .btn-search-suites {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+  .client-nav-links {
+    display: flex;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .client-nav-links::-webkit-scrollbar {
+    display: none;
+  }
+  .client-nav-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    padding: 0.5rem 0.8rem;
+  }
+  .guest-profile-chip {
+    padding: 0.3rem 0.65rem;
+  }
+  .guest-meta .guest-name {
+    font-size: 0.78rem;
+  }
+  .btn-nav-portal {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.74rem;
+  }
+  .reserva-specs-strip {
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+  .reserva-dates-info {
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+  }
+  .payment-method-selector {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}

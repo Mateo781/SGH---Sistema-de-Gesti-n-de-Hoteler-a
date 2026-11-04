@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGH | Centro de Control Técnico & Mantenimiento — Grand SGH</title>
+  <meta name="description" content="Portal operativo del Encargado de Mantenimiento de Grand SGH. Gestión de averías, emisión de informes técnicos, auditoría de repuestos y telemetría BMS hotelera.">
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Modern Executive Interface) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Hojas de estilos: Tokens de Autenticación y Módulo Técnico de Mantenimiento -->
+  <link rel="stylesheet" href="css/auth.css?v=2">
+  <link rel="stylesheet" href="css/mantenimiento.css?v=2">
+</head>
+<body>
+
+  <!-- ====================================================================== -->
+  <!-- NAVBAR SUPERIOR DEL ENCARGADO DE MANTENIMIENTO                         -->
+  <!-- ====================================================================== -->
+  <header class="maint-navbar">
+    
+    <div class="brand-section">
+      <div class="brand-crest-eng">
+        <i class="ph-bold ph-wrench"></i>
+      </div>
+      <div class="brand-names">
+        <span class="brand-title">GRAND SGH</span>
+        <span class="brand-subtitle">INGENIERÍA & MANTENIMIENTO TÉCNICO</span>
+      </div>
+    </div>
+
+    <!-- Navegación central por Casos de Uso del Encargado de Mantenimiento -->
+    <nav class="maint-nav-links">
+      <button class="maint-nav-btn active" data-target="section-reportes" id="nav-btn-reportes">
+        <i class="ph-bold ph-warning-octagon"></i>
+        <span>Reportes de Averías</span>
+        <span class="nav-counter-pill" id="badge-pend-count">4</span>
+      </button>
+
+      <button class="maint-nav-btn" data-target="section-historial" id="nav-btn-historial">
+        <i class="ph-bold ph-clock-counter-clockwise"></i>
+        <span>Historial de Reparaciones</span>
+      </button>
+    </nav>
+
+    <!-- Perfil del Supervisor de Guardia & Enlaces de Ecosistema SGH -->
+    <div class="maint-top-actions">
+      <div class="supervisor-badge" title="Sesión activa como Encargado de Mantenimiento">
+        <div class="supervisor-avatar">DS</div>
+        <div class="supervisor-meta">
+          <span class="supervisor-name">Ing. Darío Silva</span>
+          <span class="supervisor-tag">
+            <i class="ph-fill ph-check-circle"></i> Guardia Activa 24/7
+          </span>
+        </div>
+      </div>
+
+      <a href="index.html" class="btn-nav-portal" title="Cambiar a la consola ejecutiva de gerencia">
+        <i class="ph ph-sliders-horizontal"></i>
+        <span>Gerencia</span>
+      </a>
+
+      <a href="cliente.html" class="btn-nav-portal" title="Ver portal de huéspedes VIP">
+        <i class="ph ph-crown"></i>
+        <span>Huéspedes</span>
+      </a>
+
+      <a href="login.html" class="btn-nav-portal" title="Cerrar sesión">
+        <i class="ph ph-sign-out"></i>
+      </a>
+    </div>
+
+  </header>
+
+  <!-- ====================================================================== -->
+  <!-- HERO BANNER TÉCNICO & ATENCIÓN DE INCIDENCIAS                          -->
+  <!-- ====================================================================== -->
+  <section class="maint-hero-banner">
+    <div class="hero-inner-wrap">
+      
+      <div class="hero-crest-badge">
+        <i class="ph-fill ph-shield-check"></i> Centro de Operaciones Técnicas & Mantenimiento
+      </div>
+
+      <h1 class="hero-main-title">
+        Gestión técnica de instalaciones y <em>atención de averías</em>.
+      </h1>
+
+      <p class="hero-lead-text">
+        Panel de ingeniería para el Encargado de Mantenimiento. Diagnostique y atienda incidencias notificadas por Limpieza y Huéspedes, formalice informes técnicos con control de repuestos y habilite suites para el servicio 5 estrellas de Grand SGH.
+      </p>
+
+      <!-- Cuadrícula de Métricas Operativas (KPIs Vivos) -->
+      <div class="maint-kpi-grid">
+        
+        <div class="maint-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">Averías Pendientes</span>
+            <span class="kpi-val" id="kpi-pend-count">4</span>
+          </div>
+          <div class="kpi-icon-bubble urgent">
+            <i class="ph-bold ph-warning"></i>
+          </div>
+        </div>
+
+        <div class="maint-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">En Reparación Activa</span>
+            <span class="kpi-val" id="kpi-prog-count">2</span>
+          </div>
+          <div class="kpi-icon-bubble in-progress">
+            <i class="ph-bold ph-wrench"></i>
+          </div>
+        </div>
+
+        <div class="maint-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">Informes Resueltos</span>
+            <span class="kpi-val" id="kpi-res-count">3</span>
+          </div>
+          <div class="kpi-icon-bubble success">
+            <i class="ph-bold ph-check-circle"></i>
+          </div>
+        </div>
+
+        <div class="maint-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">Tiempo Medio Respuesta</span>
+            <span class="kpi-val">18 min</span>
+          </div>
+          <div class="kpi-icon-bubble info">
+            <i class="ph-bold ph-timer"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================== -->
+  <!-- CONTENEDOR PRINCIPAL: CASOS DE USO DE MANTENIMIENTO                    -->
+  <!-- ====================================================================== -->
+  <main class="maint-main-container">
+
+    <!-- ==================================================================== -->
+    <!-- SECCIÓN 1: CU CONSULTAR REPORTES DE AVERÍAS / INCIDENCIAS            -->
+    <!-- ==================================================================== -->
+    <section class="maint-section active" id="section-reportes">
+      
+      <!-- Barra de Filtros y Acciones Rápidas -->
+      <div class="maint-controls-bar">
+        
+        <div class="filter-group">
+          <span style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">
+            Filtrar Estado:
+          </span>
+          <button type="button" class="filter-chip active" data-status="ALL">Todas las Órdenes</button>
+          <button type="button" class="filter-chip" data-status="PENDIENTE">Pendientes</button>
+          <button type="button" class="filter-chip" data-status="EN_CURSO">En Reparación</button>
+          <button type="button" class="filter-chip" data-status="POSPUESTO">Pospuestas</button>
+          <button type="button" class="filter-chip" data-status="RESUELTO">Resueltas</button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <label for="filter-priority" style="font-size:0.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">
+              Prioridad:
+            </label>
+            <select id="filter-priority" class="select-filter-box">
+              <option value="ALL">Todas las Prioridades</option>
+              <option value="URGENTE">Urgente (Inmediata)</option>
+              <option value="ALTA">Alta Prioridad</option>
+              <option value="MEDIA">Media / Rutina</option>
+              <option value="BAJA">Baja / Preventivo</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-new-incident" id="btn-open-new-incident">
+            <i class="ph-bold ph-plus-circle"></i>
+            <span>Registrar Nueva Avería</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Contenedor dinámico de Tarjetas de Averías (Inyectado por mantenimiento.js) -->
+      <div class="incidents-list-grid" id="incidents-cards-container">
+        <!-- Generado dinámicamente -->
+      </div>
+
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SECCIÓN 2: CU CONSULTAR HISTORIAL DE MANTENIMIENTOS                  -->
+    <!-- ==================================================================== -->
+    <section class="maint-section" id="section-historial">
+      
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <h2 style="font-family:var(--font-serif); font-size:2rem; color:var(--navy-900); font-weight:700;">
+            Historial de Mantenimientos & Informes Auditados
+          </h2>
+          <p style="color:var(--text-muted); font-size:0.88rem; max-width:680px;">
+            Auditoría técnica de averías resueltas, materiales de reposición empleados, costos operativos y certificaciones de re-habilitación de suites.
+          </p>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="filter-chip" onclick="alert('Exportando registro histórico en formato CSV/Excel certificado...')">
+            <i class="ph-bold ph-file-arrow-down"></i> Exportar Auditoría
+          </button>
+        </div>
+      </div>
+
+      <!-- Indicador móvil de deslizamiento de tabla -->
+      <div class="table-scroll-hint">
+        <i class="ph ph-arrows-left-right"></i> Deslice lateralmente para explorar el reporte auditado completo
+      </div>
+
+      <!-- Tabla Auditada de Mantenimientos -->
+      <div class="history-table-container">
+        <table class="maint-table">
+          <thead>
+            <tr>
+              <th>ID Orden</th>
+              <th>Suite / Área</th>
+              <th>Trabajo Realizado & Diagnóstico</th>
+              <th>Técnico Responsable</th>
+              <th>Fecha Cierre</th>
+              <th>Repuestos / Piezas</th>
+              <th>Costo (Horas)</th>
+              <th>Estado Habitación</th>
+              <th style="text-align:right;">Ficha Técnica</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body">
+            <!-- Inyectado por mantenimiento.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ====================================================================== -->
+  <!-- MODAL: REGISTRAR ATENCIÓN & EMITIR INFORME TÉCNICO (CASO DE USO UML)   -->
+  <!-- ====================================================================== -->
+  <div class="maint-modal-overlay" id="repair-modal">
+    <div class="maint-modal-card">
+      
+      <!-- Cabecera del Modal -->
+      <div class="maint-modal-header">
+        <div class="modal-header-meta">
+          <div style="width:40px; height:40px; border-radius:8px; background:rgba(245,158,11,0.2); color:#fbbf24; display:flex; align-items:center; justify-content:center; font-size:1.35rem;">
+            <i class="ph-bold ph-wrench"></i>
+          </div>
+          <div>
+            <div style="font-size:0.72rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">
+              Orden de Intervención Técnica &bull; <span id="modal-inc-id">INC-0000</span>
+            </div>
+            <h3 class="modal-header-title">Atención & Emisión de Informe Técnico</h3>
+          </div>
+        </div>
+
+        <button type="button" id="btn-close-repair-modal" style="background:transparent; border:none; color:#cbd5e1; font-size:1.5rem; cursor:pointer;" aria-label="Cerrar ventana">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <!-- Formulario de Intervención -->
+      <form id="form-repair-report">
+        
+        <div class="maint-modal-body">
+          
+          <!-- Tarjeta de Contexto de la Avería -->
+          <div style="background:var(--bg-subtle); border:1px solid var(--border-medium); border-radius:var(--radius-md); padding:1rem 1.25rem;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.35rem;">
+              <h4 id="modal-inc-title" style="font-size:1.05rem; font-weight:700; color:var(--navy-900);">Avería</h4>
+              <span id="modal-inc-area" style="font-size:0.78rem; font-weight:700; color:var(--navy-700); background:#fff; padding:0.2rem 0.6rem; border-radius:4px; border:1px solid var(--border-light);">Zona</span>
+            </div>
+            <p id="modal-inc-desc" style="font-size:0.83rem; color:var(--text-secondary); line-height:1.45;"></p>
+          </div>
+
+          <!-- CASO DE USO INCLUIDO: Realizar Informe Técnico -->
+          <div>
+            <div class="modal-section-title">
+              <i class="ph-bold ph-file-text"></i>
+              <span>Caso de Uso Incluido: Realizar Informe Técnico</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.9rem;">
+              
+              <div class="maint-field">
+                <label class="maint-label" for="rep-diag">
+                  Diagnóstico Técnico y Causa Raíz de la Falla <span style="color:var(--status-urgent);">*</span>
+                </label>
+                <textarea 
+                  id="rep-diag" 
+                  class="maint-textarea" 
+                  placeholder="Detalle el motivo del desperfecto (desgaste mecánico, sobretensión, fatiga de material, descalibración)..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="maint-field">
+                <label class="maint-label" for="rep-actions">
+                  Acciones Correctivas & Procedimiento Ejecutado <span style="color:var(--status-urgent);">*</span>
+                </label>
+                <textarea 
+                  id="rep-actions" 
+                  class="maint-textarea" 
+                  placeholder="Describa el trabajo realizado paso a paso para subsanar la avería y las pruebas de seguridad efectuadas..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="maint-form-grid">
+                <div class="maint-field">
+                  <label class="maint-label" for="rep-parts">Repuestos / Consumibles Utilizados</label>
+                  <input type="text" id="rep-parts" class="maint-input" placeholder="Ej: Válvula 3 vías, filtro HEPA, sellador">
+                </div>
+
+                <div class="maint-field">
+                  <label class="maint-label" for="rep-hours">Horas Hombre Empleadas (hs)</label>
+                  <input type="number" id="rep-hours" class="maint-input" step="0.5" min="0.5" value="1.0" required>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CASO DE USO INCLUIDO: Notificar Habitación Reparada -->
+          <div class="notification-suite-box">
+            <input type="checkbox" id="check-notify-suite" checked>
+            <div>
+              <div class="notify-text-title">
+                <i class="ph-bold ph-bell-ringing"></i> Notificar Habitación Reparada & Habilitar para Reservas
+              </div>
+              <div class="notify-text-sub">
+                Al finalizar, el sistema actualiza automáticamente el inventario hotelero, marcando la suite como OPERATIVA y notificando de inmediato a Recepción y Gobernanta de Limpieza.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pie de Acciones del Modal -->
+        <div class="maint-modal-footer">
+          <button type="button" class="btn-postpone-repair" onclick="document.getElementById('repair-modal').classList.remove('active')">
+            <span>Cancelar / Volver</span>
+          </button>
+
+          <button type="submit" class="btn-complete-repair" id="btn-submit-repair-order">
+            <i class="ph-bold ph-check-circle"></i>
+            <span>Completar Reparación & Emitir Informe</span>
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- MODAL: REGISTRAR NUEVA AVERÍA (LEVANTAMIENTO EN RECORRIDO DE GUARDIA)   -->
+  <!-- ====================================================================== -->
+  <div class="maint-modal-overlay" id="modal-new-incident">
+    <div class="maint-modal-card" style="max-width:620px;">
+      
+      <div class="maint-modal-header" style="background:var(--navy-900);">
+        <div class="modal-header-meta">
+          <div style="width:40px; height:40px; border-radius:8px; background:rgba(37,99,235,0.2); color:#60a5fa; display:flex; align-items:center; justify-content:center; font-size:1.35rem;">
+            <i class="ph-bold ph-plus-circle"></i>
+          </div>
+          <div>
+            <div style="font-size:0.72rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">
+              Inspección Técnica de Mantenimiento
+            </div>
+            <h3 class="modal-header-title">Registrar Nueva Incidencia</h3>
+          </div>
+        </div>
+
+        <button type="button" id="btn-close-new-modal" style="background:transparent; border:none; color:#cbd5e1; font-size:1.5rem; cursor:pointer;" aria-label="Cerrar">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <form id="form-new-incident">
+        <div class="maint-modal-body">
+          
+          <div class="maint-form-grid">
+            <div class="maint-field">
+              <label class="maint-label" for="new-inc-room">Habitación o Área <span style="color:var(--status-urgent);">*</span></label>
+              <input type="text" id="new-inc-room" class="maint-input" placeholder="Ej: Suite 305 o Spa Planta Baja" required>
+            </div>
+
+            <div class="maint-field">
+              <label class="maint-label" for="new-inc-priority">Prioridad de Intervención</label>
+              <select id="new-inc-priority" class="maint-select">
+                <option value="URGENTE">Urgente (Afecta estancia del huésped)</option>
+                <option value="ALTA" selected>Alta (Requiere solución en el turno)</option>
+                <option value="MEDIA">Media (Rutina de guardia)</option>
+                <option value="BAJA">Baja (Mantenimiento preventivo)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="maint-field">
+            <label class="maint-label" for="new-inc-title">Título Descriptivo de la Falla <span style="color:var(--status-urgent);">*</span></label>
+            <input type="text" id="new-inc-title" class="maint-input" placeholder="Ej: Fuga en racor de retorno de fan-coil" required>
+          </div>
+
+          <div class="maint-field">
+            <label class="maint-label" for="new-inc-desc">Detalle y Síntomas Observados <span style="color:var(--status-urgent);">*</span></label>
+            <textarea id="new-inc-desc" class="maint-textarea" placeholder="Describa el problema observado durante la inspección técnica o reporte verbal..." required></textarea>
+          </div>
+
+          <div class="maint-field">
+            <label class="maint-label" for="new-inc-parts">Materiales o Repuestos Estimados</label>
+            <input type="text" id="new-inc-parts" class="maint-input" placeholder="Ej: Juego de juntas tóricas 3/4">
+          </div>
+
+        </div>
+
+        <div class="maint-modal-footer">
+          <button type="button" class="btn-postpone-repair" onclick="document.getElementById('modal-new-incident').classList.remove('active')">
+            Cancelar
+          </button>
+          <button type="submit" class="btn-complete-repair">
+            <i class="ph-bold ph-plus"></i>
+            <span>Crear Reporte de Avería</span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Scripts del Módulo de Mantenimiento -->
+  <script src="js/mantenimiento.js?v=2"></script>
+</body>
+</html>

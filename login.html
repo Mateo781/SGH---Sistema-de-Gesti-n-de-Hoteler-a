@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGH | Acceso al Sistema de Gestión Hotelera — Grand SGH</title>
+  <meta name="description" content="Portal de autenticación y registro de usuarios para el Sistema de Gestión Hotelera (SGH). Acceso para Gerentes, Clientes, Personal de Limpieza y Mantenimiento.">
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Modern Executive Interface) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Hoja de estilos del portal de autenticación -->
+  <link rel="stylesheet" href="css/auth.css?v=2">
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    
+    <!-- ====================================================================== -->
+    <!-- COLUMNA IZQUIERDA: SHOWCASE CORPORATIVO & EXPERIENCIA HOTELERA         -->
+    <!-- ====================================================================== -->
+    <div class="auth-showcase">
+      <div class="auth-showcase-bg"></div>
+      <div class="auth-showcase-overlay"></div>
+
+      <div class="auth-showcase-content">
+        <!-- Logo / Marca -->
+        <div class="showcase-brand">
+          <div class="showcase-crest">
+            <i class="ph-bold ph-buildings"></i>
+          </div>
+          <div>
+            <div class="showcase-title">GRAND SGH</div>
+            <div class="showcase-subtitle">LUXURY RESIDENCES & HOTEL</div>
+          </div>
+        </div>
+
+        <!-- Centro: Mensaje Editorial y Ecosistema de Roles -->
+        <div class="showcase-center">
+          <div class="showcase-tag">
+            <i class="ph-fill ph-shield-check"></i> Enterprise Hospitality v2.6
+          </div>
+          <h1 class="showcase-heading">
+            Excelencia, discreción y <em>maestría operativa</em> en cada detalle.
+          </h1>
+          <p class="showcase-quote">
+            Plataforma integral de administración hotelera conectando la toma de decisiones de la gerencia con la atención a huéspedes, el mantenimiento técnico y la gobernanza de suites en tiempo real.
+          </p>
+
+          <!-- Cuadrícula con los 4 tipos de usuario del SGH -->
+          <div class="ecosystem-roles-grid">
+            
+            <div class="role-preview-card">
+              <div class="role-preview-icon gerente">
+                <i class="ph-fill ph-crown"></i>
+              </div>
+              <div>
+                <div class="role-preview-name">Gerente General</div>
+                <div class="role-preview-desc">Auditoría, usuarios y balances</div>
+              </div>
+            </div>
+
+            <div class="role-preview-card">
+              <div class="role-preview-icon cliente">
+                <i class="ph-fill ph-user-circle"></i>
+              </div>
+              <div>
+                <div class="role-preview-name">Cliente / Huésped</div>
+                <div class="role-preview-desc">Reservas de suites y estancias</div>
+              </div>
+            </div>
+
+            <div class="role-preview-card">
+              <div class="role-preview-icon limpieza">
+                <i class="ph-fill ph-sparkle"></i>
+              </div>
+              <div>
+                <div class="role-preview-name">Personal Limpieza</div>
+                <div class="role-preview-desc">Estatus de suites y aseo</div>
+              </div>
+            </div>
+
+            <div class="role-preview-card">
+              <div class="role-preview-icon mantenimiento">
+                <i class="ph-fill ph-wrench"></i>
+              </div>
+              <div>
+                <div class="role-preview-name">Mantenimiento</div>
+                <div class="role-preview-desc">Órdenes técnicas e incidencias</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pie de Showcase: Certificación -->
+        <div class="showcase-footer">
+          <div class="security-badge">
+            <i class="ph-fill ph-lock-key"></i>
+            <span>Conexión TLS 256-Bit Cifrada</span>
+          </div>
+          <div>SGH Enterprise Cloud Vault</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================== -->
+    <!-- COLUMNA DERECHA: PORTAL DE ACCESO / FORMULARIOS (LOGIN & REGISTRO)     -->
+    <!-- ====================================================================== -->
+    <div class="auth-panel">
+      
+      <!-- Topbar de la tarjeta -->
+      <div class="auth-topbar">
+        <a href="index.html" class="back-to-home" title="Ir al panel administrativo">
+          <i class="ph-bold ph-arrow-left"></i>
+          <span>Entrar al Dashboard</span>
+        </a>
+        <div class="sys-badge">
+          <span class="dot-green"></span> Servidores Activos
+        </div>
+      </div>
+
+      <!-- Cuerpo del Formulario -->
+      <div class="auth-card-body">
+        
+        <!-- Encabezado dinámico -->
+        <div class="auth-header">
+          <h2 class="auth-headline" id="auth-headline">Acceso al Portal SGH</h2>
+          <p class="auth-subhead" id="auth-subhead">
+            Ingrese sus credenciales certificadas de usuario para ingresar al sistema.
+          </p>
+        </div>
+
+        <!-- Selector de Modo (Pills Toggle) -->
+        <div class="auth-mode-tabs">
+          <button type="button" class="tab-btn active" id="tab-login-btn">
+            <i class="ph ph-sign-in"></i> Iniciar Sesión
+          </button>
+          <button type="button" class="tab-btn" id="tab-register-btn">
+            <i class="ph ph-user-plus"></i> Crear Cuenta
+          </button>
+        </div>
+
+        <!-- Barra de Acceso Rápido Demo para Evaluación / Pruebas -->
+        <div class="demo-access-strip">
+          <div class="demo-access-label">
+            <span><i class="ph ph-lightning"></i> Acceso Rápido Demo (1-Click)</span>
+            <span style="font-size: 0.65rem; color: var(--text-muted);">Carga automática</span>
+          </div>
+          <div class="demo-chips">
+            <button type="button" class="demo-chip active" data-demo-role="GERENTE" title="Cargar credenciales de Gerente">
+              <i class="ph-fill ph-crown" style="color: #8b5cf6;"></i> Gerente
+            </button>
+            <button type="button" class="demo-chip" data-demo-role="CLIENTE" title="Cargar credenciales de Cliente VIP">
+              <i class="ph-fill ph-user" style="color: #3b82f6;"></i> Cliente VIP
+            </button>
+            <button type="button" class="demo-chip" data-demo-role="LIMPIEZA" title="Cargar credenciales de Limpieza">
+              <i class="ph-fill ph-sparkle" style="color: #10b981;"></i> Limpieza
+            </button>
+            <button type="button" class="demo-chip" data-demo-role="MANTENIMIENTO" title="Cargar credenciales de Mantenimiento">
+              <i class="ph-fill ph-wrench" style="color: #f59e0b;"></i> Mantenimiento
+            </button>
+          </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- FORMULARIO 1: INICIAR SESIÓN (LOGIN)           -->
+        <!-- ============================================== -->
+        <form class="auth-form" id="form-login">
+          
+          <div class="form-group">
+            <label class="form-label" for="login-email">Correo Electrónico / Usuario</label>
+            <div class="input-with-icon">
+              <i class="ph ph-envelope-simple input-icon"></i>
+              <input 
+                type="email" 
+                id="login-email" 
+                class="form-input" 
+                placeholder="ejemplo@grandsgh.com" 
+                value="mateo.gonzalez@grandsgh.com" 
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-pass">Contraseña de Seguridad</label>
+            <div class="input-with-icon">
+              <i class="ph ph-lock-key input-icon"></i>
+              <input 
+                type="password" 
+                id="login-pass" 
+                class="form-input" 
+                placeholder="••••••••••••" 
+                value="Gerente2026*" 
+                required
+              >
+              <button type="button" class="toggle-password-btn" data-target="login-pass" aria-label="Mostrar contraseña">
+                <i class="ph ph-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-options-row">
+            <label class="remember-check">
+              <input type="checkbox" id="remember-me" checked>
+              <span>Recordar en este equipo</span>
+            </label>
+            <a href="#" class="forgot-link" id="link-forgot-pass">¿Olvidó su clave?</a>
+          </div>
+
+          <button type="submit" class="btn-submit-auth" id="btn-login-submit">
+            <span>Ingresar al Portal SGH</span>
+            <i class="ph-bold ph-arrow-right"></i>
+          </button>
+        </form>
+
+        <!-- ============================================== -->
+        <!-- FORMULARIO 2: CREAR CUENTA (REGISTRO)          -->
+        <!-- ============================================== -->
+        <form class="auth-form" id="form-register" style="display: none;">
+          
+          <div class="form-group">
+            <label class="form-label" for="reg-nombre">Nombre y Apellido</label>
+            <div class="input-with-icon">
+              <i class="ph ph-user input-icon"></i>
+              <input 
+                type="text" 
+                id="reg-nombre" 
+                class="form-input" 
+                placeholder="Ej. Sofia Albarracín" 
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Correo Electrónico</label>
+            <div class="input-with-icon">
+              <i class="ph ph-envelope-simple input-icon"></i>
+              <input 
+                type="email" 
+                id="reg-email" 
+                class="form-input" 
+                placeholder="s.albarracin@correo.com" 
+                required
+              >
+            </div>
+          </div>
+
+          <!-- Selección del Rol de Usuario -->
+          <div class="form-group">
+            <label class="form-label">Tipo de Usuario en el Sistema</label>
+            <div class="role-choice-grid">
+              
+              <label class="role-choice-card">
+                <input type="radio" name="role-select" value="GERENTE" class="role-choice-radio">
+                <i class="ph-fill ph-crown role-choice-icon" style="color:#7c3aed;"></i>
+                <div class="role-choice-meta">
+                  <span class="role-choice-title">Gerente</span>
+                  <span class="role-choice-badge">Dirección</span>
+                </div>
+              </label>
+
+              <label class="role-choice-card selected">
+                <input type="radio" name="role-select" value="CLIENTE" class="role-choice-radio" checked>
+                <i class="ph-fill ph-user-circle role-choice-icon" style="color:#2563eb;"></i>
+                <div class="role-choice-meta">
+                  <span class="role-choice-title">Cliente VIP</span>
+                  <span class="role-choice-badge">Huésped</span>
+                </div>
+              </label>
+
+              <label class="role-choice-card">
+                <input type="radio" name="role-select" value="LIMPIEZA" class="role-choice-radio">
+                <i class="ph-fill ph-sparkle role-choice-icon" style="color:#059669;"></i>
+                <div class="role-choice-meta">
+                  <span class="role-choice-title">Limpieza</span>
+                  <span class="role-choice-badge">Gobernanza</span>
+                </div>
+              </label>
+
+              <label class="role-choice-card">
+                <input type="radio" name="role-select" value="MANTENIMIENTO" class="role-choice-radio">
+                <i class="ph-fill ph-wrench role-choice-icon" style="color:#d97706;"></i>
+                <div class="role-choice-meta">
+                  <span class="role-choice-title">Mantenimiento</span>
+                  <span class="role-choice-badge">Operaciones</span>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-pass">Contraseña</label>
+            <div class="input-with-icon">
+              <i class="ph ph-lock-key input-icon"></i>
+              <input 
+                type="password" 
+                id="reg-pass" 
+                class="form-input" 
+                placeholder="Mínimo 8 caracteres" 
+                required
+              >
+              <button type="button" class="toggle-password-btn" data-target="reg-pass" aria-label="Mostrar contraseña">
+                <i class="ph ph-eye"></i>
+              </button>
+            </div>
+            <!-- Medidor visual de fortaleza -->
+            <div class="password-meter">
+              <div class="meter-bar">
+                <div class="meter-fill" id="meter-fill"></div>
+              </div>
+              <span class="meter-text" id="meter-text">Seguridad</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-pass-conf">Confirmar Contraseña</label>
+            <div class="input-with-icon">
+              <i class="ph ph-shield-check input-icon"></i>
+              <input 
+                type="password" 
+                id="reg-pass-conf" 
+                class="form-input" 
+                placeholder="Repita su contraseña" 
+                required
+              >
+            </div>
+          </div>
+
+          <label class="remember-check" style="font-size: 0.75rem; margin-top: 0.25rem;">
+            <input type="checkbox" id="terms-check" required checked>
+            <span>Acepto las políticas de confidencialidad y términos del servicio SGH.</span>
+          </label>
+
+          <button type="submit" class="btn-submit-auth">
+            <span>Crear Cuenta en SGH</span>
+            <i class="ph-bold ph-arrow-right"></i>
+          </button>
+        </form>
+
+      </div>
+
+      <!-- Pie del Panel -->
+      <div class="auth-panel-footer">
+        <div>&copy; 2026 Grand SGH Hospitality Group.</div>
+        <div>
+          <a href="#">Privacidad</a> &bull; <a href="#">Términos</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- MODAL: RECUPERACIÓN DE CONTRASEÑA                                      -->
+  <!-- ====================================================================== -->
+  <div class="simple-modal-overlay" id="modal-recovery">
+    <div class="simple-modal-card">
+      <button type="button" class="modal-close-icon" id="btn-close-modal" aria-label="Cerrar modal">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <div style="margin-bottom: 1.25rem;">
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--navy-50); color: var(--navy-700); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1rem;">
+          <i class="ph-fill ph-key"></i>
+        </div>
+        <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--navy-900); font-weight: 700; margin-bottom: 0.35rem;">
+          Recuperar Credenciales
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+          Indique su correo corporativo o registrado. Le enviaremos un código de seguridad para restablecer el acceso a su perfil.
+        </p>
+      </div>
+
+      <form id="form-recovery" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div class="form-group">
+          <label class="form-label" for="recovery-email">Correo Electrónico</label>
+          <div class="input-with-icon">
+            <i class="ph ph-envelope-simple input-icon"></i>
+            <input type="email" id="recovery-email" class="form-input" placeholder="usuario@grandsgh.com" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit-auth" style="margin-top: 0.5rem;">
+          <span>Enviar Instrucciones</span>
+          <i class="ph-bold ph-paper-plane-tilt"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script modular de autenticación -->
+  <script src="js/auth.js?v=2"></script>
+</body>
+</html>
