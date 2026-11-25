@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SGH - SISTEMA DE GESTIÓN HOTELERA | GRAND SGH LUXURY
+   SGH - SISTEMA DE GESTIÓN HOTELERA | 620 SGH LUXURY
    Aesthetic Direction: High-End Riviera Executive Navy & Alabaster White
    Primary: Deep Navy Blue (#0A192F, #0F2942, #1E3A8A)
    Secondary: Pure & Off-White (#FFFFFF, #F8FAFC, #F1F5F9)
@@ -183,17 +183,23 @@ html, body {
 }
 
 .brand-crest {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--navy-700), var(--navy-850));
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: transparent;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 1.4rem;
+  flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .brand-meta {

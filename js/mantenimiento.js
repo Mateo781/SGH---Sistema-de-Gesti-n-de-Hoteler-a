@@ -10,6 +10,22 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.SGH_DB) {
+    const activeUser = SGH_DB.requireAuth(['MANTENIMIENTO', 'GERENTE']);
+    if (!activeUser) return;
+
+    const avatarEl = document.querySelector('.supervisor-avatar');
+    const nameEl = document.querySelector('.supervisor-name');
+    if (avatarEl) avatarEl.textContent = activeUser.iniciales;
+    if (nameEl) nameEl.textContent = activeUser.nombre;
+
+    const logoutLink = document.querySelector('a[href="login.html"]');
+    if (logoutLink) {
+      logoutLink.addEventListener('click', () => SGH_DB.logout());
+    }
+  }
+
+  mergeSharedIncidents();
   initMaintNavigation();
   initFilters();
   initRepairModal();
@@ -48,7 +64,7 @@ const SGH_MAINT_STATE = {
       titulo: 'Goteo en Grifería Termostática de Hidromasaje',
       descripcion: 'Pérdida continua de agua caliente por la junta del mezclador principal de la bañera de hidromasaje.',
       prioridad: 'ALTA',
-      reportadoPor: 'Huésped VIP (Dra. Elena Rostova)',
+      reportadoPor: 'Huésped (Dra. Elena Rostova)',
       tiempo: 'Hace 1 hora',
       estado: 'EN_CURSO',
       repuestosEstimados: 'Cartucho cerámico termostático 1/2'
@@ -72,7 +88,7 @@ const SGH_MAINT_STATE = {
       titulo: 'Bloqueo en Motor de Cortinas Blackout Panorámicas',
       descripcion: 'El servomotor lateral del riel este se trabó en posición semiabierta. Requiere lubricación y reseteo de fin de carrera.',
       prioridad: 'MEDIA',
-      reportadoPor: 'Mayordomía VIP',
+      reportadoPor: 'Mayordomía',
       tiempo: 'Hace 4 horas',
       estado: 'PENDIENTE',
       repuestosEstimados: 'Fusible térmico 2A / Grasa dieléctrica'
@@ -131,6 +147,38 @@ const SGH_MAINT_STATE = {
     }
   ]
 };
+
+function mergeSharedIncidents() {
+  try {
+    const raw = localStorage.getItem('sgh_incidencias_db_v1');
+    if (!raw) return;
+    const shared = JSON.parse(raw);
+    if (!Array.isArray(shared)) return;
+
+    const existingIds = new Set(SGH_MAINT_STATE.incidencias.map(i => i.id));
+    const extras = shared.filter(i => i && i.id && !existingIds.has(i.id));
+    if (extras.length > 0) {
+      SGH_MAINT_STATE.incidencias = [...extras, ...SGH_MAINT_STATE.incidencias];
+    }
+    // Sincronizar estados actualizados desde mantenimiento si ya existían
+    shared.forEach(s => {
+      const match = SGH_MAINT_STATE.incidencias.find(i => i.id === s.id);
+      if (match && s.estado && extras.indexOf(s) === -1) {
+        match.estado = s.estado;
+      }
+    });
+  } catch (err) {
+    // Ignorar errores de almacenamiento
+  }
+}
+
+function saveSharedIncidents() {
+  try {
+    localStorage.setItem('sgh_incidencias_db_v1', JSON.stringify(SGH_MAINT_STATE.incidencias));
+  } catch (err) {
+    // Ignorar errores de almacenamiento
+  }
+}
 
 /**
  * 1. Navegación por Secciones
@@ -389,6 +437,7 @@ function completeRepairOrder() {
     };
 
     SGH_MAINT_STATE.historial.unshift(nuevoHistorial);
+    saveSharedIncidents();
 
     btnSubmit.disabled = false;
     btnSubmit.innerHTML = '<i class="ph-bold ph-check-circle"></i> <span>Completar Reparación & Emitir Informe</span>';
@@ -427,6 +476,7 @@ function postponeIncident(incidentId) {
   if (motivo) {
     inc.estado = 'POSPUESTO';
     inc.descripcion += ` [POSPUESTO: ${motivo}]`;
+    saveSharedIncidents();
     renderIncidencias();
     updateMaintKPIs();
     showMaintToast(`La orden ${inc.id} se ha pospuesto. Motivo registrado: "${motivo}"`, 'warning');
@@ -588,6 +638,7 @@ function initNewIncidentModal() {
       };
 
       SGH_MAINT_STATE.incidencias.unshift(newInc);
+      saveSharedIncidents();
       form.reset();
       modal.classList.remove('active');
       renderIncidencias();

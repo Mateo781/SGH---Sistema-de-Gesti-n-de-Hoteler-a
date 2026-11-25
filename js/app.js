@@ -1,5 +1,5 @@
 /**
- * SGH - SISTEMA DE GESTIÓN HOTELERA | GRAND SGH LUXURY
+ * SGH - SISTEMA DE GESTIÓN HOTELERA | 620 SGH LUXURY
  * Dashboard Ejecutivo del Gerente
  * 
  * Implementación de Casos de Uso del Diagrama UML de Gerente:
@@ -32,9 +32,9 @@ const SGH_STATE = {
       monto: 12500,
       estado: 'CHECK_IN', // CHECK_IN | CONFIRMADA | PENDIENTE_PAGO | CANCELADA
       estadoPago: 'PAGADO',
-      metodoPago: 'Transferencia Amex Platinum Concierge',
+      metodoPago: 'Transferencia Amex Platinum',
       auditLog: [
-        { fecha: '20 Oct 2026, 14:10', accion: 'Reserva creada vía Portal VIP Cliente' },
+        { fecha: '20 Oct 2026, 14:10', accion: 'Reserva creada vía Portal Cliente' },
         { fecha: '20 Oct 2026, 14:15', accion: 'Pago de garantía completado ($12,500.00)' },
         { fecha: '26 Oct 2026, 12:30', accion: 'Suite inspeccionada y entregada con amenidades especiales' },
         { fecha: '26 Oct 2026, 13:45', accion: 'Check-in presencial validado con pasaporte diplomático' }
@@ -139,7 +139,7 @@ const SGH_STATE = {
     {
       id: 'USR-001',
       nombre: 'Lic. Mateo González',
-      email: 'mateo.gonzalez@grandsgh.com',
+      email: 'mateo.gonzalez@620sgh.com',
       rol: 'GERENTE',
       departamento: 'Dirección General & Operaciones',
       estado: 'ACTIVO',
@@ -149,7 +149,7 @@ const SGH_STATE = {
     {
       id: 'USR-002',
       nombre: 'Clara Domínguez',
-      email: 'c.dominguez@grandsgh.com',
+      email: 'c.dominguez@620sgh.com',
       rol: 'GERENTE',
       departamento: 'Gerencia de Finanzas & Auditoría',
       estado: 'ACTIVO',
@@ -159,7 +159,7 @@ const SGH_STATE = {
     {
       id: 'USR-003',
       nombre: 'Rosaura Mendez',
-      email: 'r.mendez@grandsgh.com',
+      email: 'r.mendez@620sgh.com',
       rol: 'LIMPIEZA',
       departamento: 'Housekeeping Pisos 3 y 4',
       estado: 'ACTIVO',
@@ -169,7 +169,7 @@ const SGH_STATE = {
     {
       id: 'USR-004',
       nombre: 'Carmen Peralta',
-      email: 'carmen.p@grandsgh.com',
+      email: 'carmen.p@620sgh.com',
       rol: 'LIMPIEZA',
       departamento: 'Housekeeping Turno Matutino',
       estado: 'ACTIVO',
@@ -179,9 +179,9 @@ const SGH_STATE = {
     {
       id: 'USR-005',
       nombre: 'Javier Morales',
-      email: 'j.morales@grandsgh.com',
+      email: 'j.morales@620sgh.com',
       rol: 'LIMPIEZA',
-      departamento: 'Housekeeping Penthouse & Spa',
+      departamento: 'Housekeeping Penthouse',
       estado: 'INHABILITADO',
       ultimoAcceso: 'Hace 3 días',
       iniciales: 'JM'
@@ -189,7 +189,7 @@ const SGH_STATE = {
     {
       id: 'USR-006',
       nombre: 'Ing. Roberto Benítez',
-      email: 'r.benitez@grandsgh.com',
+      email: 'r.benitez@620sgh.com',
       rol: 'MANTENIMIENTO',
       departamento: 'Jefatura de Mantenimiento & Clima',
       estado: 'ACTIVO',
@@ -199,7 +199,7 @@ const SGH_STATE = {
     {
       id: 'USR-007',
       nombre: 'Darío Navarro',
-      email: 'd.navarro@grandsgh.com',
+      email: 'd.navarro@620sgh.com',
       rol: 'MANTENIMIENTO',
       departamento: 'Electromecánica & Bombas',
       estado: 'ACTIVO',
@@ -209,7 +209,7 @@ const SGH_STATE = {
     {
       id: 'USR-008',
       nombre: 'Emilio Varela',
-      email: 'e.varela@grandsgh.com',
+      email: 'e.varela@620sgh.com',
       rol: 'MANTENIMIENTO',
       departamento: 'Servicios Edilicios',
       estado: 'ACTIVO',
@@ -221,7 +221,7 @@ const SGH_STATE = {
       nombre: 'Sr. George H. Vance',
       email: 'g.vance@vanceholdings.com',
       rol: 'CLIENTE',
-      departamento: 'Huésped Frecuente VIP',
+      departamento: 'Huésped Frecuente',
       estado: 'ACTIVO',
       ultimoAcceso: '24 Oct 2026',
       iniciales: 'GV'
@@ -246,7 +246,7 @@ const SGH_STATE = {
       categoria: 'Ocupación & Reservas',
       fecha: '26 Oct 2026, 17:30',
       generadoPor: 'Lic. Mateo González',
-      destinatarios: 'directorio@grandsgh.com',
+      destinatarios: 'directorio@620sgh.com',
       estadoEnvio: 'ENVIADO',
       resumen: 'Ocupación media del 88.4%. Mayor demanda en suites Penthouse y Master.'
     },
@@ -256,7 +256,7 @@ const SGH_STATE = {
       categoria: 'Financiero & Ingresos',
       fecha: '24 Oct 2026, 11:15',
       generadoPor: 'Clara Domínguez',
-      destinatarios: 'auditoria@grandsgh.com',
+      destinatarios: 'auditoria@620sgh.com',
       estadoEnvio: 'ENVIADO',
       resumen: 'Superávit operativo del 18.5% respecto a metas trimestrales.'
     },
@@ -266,7 +266,7 @@ const SGH_STATE = {
       categoria: 'Operaciones & Limpieza',
       fecha: '21 Oct 2026, 16:40',
       generadoPor: 'Lic. Mateo González',
-      destinatarios: 'operaciones@grandsgh.com',
+      destinatarios: 'operaciones@620sgh.com',
       estadoEnvio: 'ENVIADO',
       resumen: 'Tiempo promedio de limpieza reducido a 24 minutos por habitación estándar.'
     },
@@ -276,7 +276,7 @@ const SGH_STATE = {
       categoria: 'Mantenimiento & Incidencias',
       fecha: '18 Oct 2026, 09:20',
       generadoPor: 'Lic. Mateo González',
-      destinatarios: 'mantenimiento@grandsgh.com',
+      destinatarios: 'mantenimiento@620sgh.com',
       estadoEnvio: 'ENVIADO',
       resumen: 'Certificación de calderas y chillers efectuada conforme a normativa.'
     }
@@ -288,6 +288,22 @@ const SGH_STATE = {
 // =============================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.SGH_DB) {
+    const activeUser = SGH_DB.requireAuth(['GERENTE']);
+    if (!activeUser) return;
+
+    SGH_STATE.usuarios = SGH_DB.getUsers();
+    const avatarEl = document.querySelector('.user-avatar');
+    const nameEl = document.querySelector('.user-name');
+    if (avatarEl) avatarEl.textContent = activeUser.iniciales;
+    if (nameEl) nameEl.textContent = activeUser.nombre;
+
+    const logoutBtn = document.querySelector('.user-logout-btn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => SGH_DB.logout());
+    }
+  }
+
   initNavigation();
   initMobileDrawer();
   renderAllViews();
@@ -841,6 +857,9 @@ function submitAssignRole(e) {
 
   user.rol = newRole;
   user.departamento = department;
+  if (window.SGH_DB) {
+    SGH_DB.updateUser(user.id, { rol: newRole, departamento: department });
+  }
 
   closeModal('modal-roles');
   renderAllViews();
@@ -860,6 +879,10 @@ function toggleUserStatus(userId) {
   } else {
     user.estado = 'ACTIVO';
     showToast(`Usuario ${user.nombre} reactivado exitosamente.`);
+  }
+
+  if (window.SGH_DB) {
+    SGH_DB.updateUser(user.id, { estado: user.estado });
   }
 
   renderAllViews();

@@ -1,5 +1,5 @@
 /**
- * SGH - SISTEMA DE GESTIÓN HOTELERA | PORTAL DEL CLIENTE VIP
+ * SGH - SISTEMA DE GESTIÓN HOTELERA | PORTAL DEL CLIENTE
  * Controlador de Casos de Uso del Cliente:
  * 1. Consultar Disponibilidad de Habitaciones
  * 2. Realizar Reserva (<<include>> Procesar Pago)
@@ -8,6 +8,26 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.SGH_DB) {
+    const activeUser = SGH_DB.requireAuth(['CLIENTE', 'GERENTE']);
+    if (!activeUser) return;
+
+    SGH_CLIENTE_STATE.guestName = activeUser.nombre;
+    const avatarEl = document.querySelector('.guest-avatar');
+    const nameEl = document.querySelector('.guest-name');
+    const heroLead = document.querySelector('.hero-lead-text');
+    if (avatarEl) avatarEl.textContent = activeUser.iniciales;
+    if (nameEl) nameEl.textContent = activeUser.nombre;
+    if (heroLead) {
+      heroLead.textContent = `Bienvenido/a a 620 SGH, ${activeUser.nombre}. Seleccione entre nuestras suites privadas con servicio de mayordomo las 24 horas, terrazas panorámicas y privacidad absoluta.`;
+    }
+
+    const logoutLink = document.querySelector('a[href="login.html"]');
+    if (logoutLink) {
+      logoutLink.addEventListener('click', () => SGH_DB.logout());
+    }
+  }
+
   initClientNavigation();
   initAvailabilitySearch();
   initBookingModal();
@@ -25,7 +45,7 @@ const SGH_SUITES = [
     nombre: 'Penthouse Imperial',
     categoria: 'Royal Master Suite',
     precioNoche: 2500,
-    imagen: 'img/suite_penthouse.jpg',
+    imagen: '../img/suite_penthouse.jpg',
     capacidad: 4,
     superficie: '220 m²',
     cama: '1 King Size Imperial + 1 Queen',
@@ -40,14 +60,14 @@ const SGH_SUITES = [
     nombre: 'Suite Embajador',
     categoria: 'Executive Corner Suite',
     precioNoche: 1300,
-    imagen: 'img/suite_embajador.jpg',
+    imagen: '../img/suite_embajador.jpg',
     capacidad: 2,
     superficie: '135 m²',
     cama: '1 King Size Premium',
     vista: 'Vista Frontal al Lago y Bosque',
     descripcion: 'Diseñada para la máxima tranquilidad y distinción diplomática. Balcón panorámico con ventanales de suelo a techo, área de reuniones ejecutivas y cava de vinos privada.',
     disponible: true,
-    badge: 'Favorita VIP'
+    badge: 'Más Elegida'
   },
   {
     id: 'STE-302',
@@ -55,7 +75,7 @@ const SGH_SUITES = [
     nombre: 'Gran Terraza Jardín',
     categoria: 'Deluxe Family Suite',
     precioNoche: 1100,
-    imagen: 'img/suite_embajador.jpg',
+    imagen: '../img/suite_embajador.jpg',
     capacidad: 5,
     superficie: '160 m²',
     cama: '2 King Size + 1 Sofá Cama',
@@ -70,7 +90,7 @@ const SGH_SUITES = [
     nombre: 'Vista al Lago Superior',
     categoria: 'Premium King Room',
     precioNoche: 975,
-    imagen: 'img/suite_penthouse.jpg',
+    imagen: '../img/suite_penthouse.jpg',
     capacidad: 2,
     superficie: '95 m²',
     cama: '1 King Size',
@@ -87,6 +107,7 @@ const SGH_SUITES = [
 const SGH_CLIENTE_STATE = {
   activeSection: 'section-catalogo',
   selectedSuite: null,
+  guestName: 'Dra. Elena Rostova',
   checkInDate: '2026-11-05',
   checkOutDate: '2026-11-10',
   huespedes: 2,
@@ -98,7 +119,7 @@ const SGH_CLIENTE_STATE = {
       suiteId: 'STE-404',
       suiteNombre: 'Suite Embajador',
       categoria: 'Executive Corner Suite',
-      imagen: 'img/suite_embajador.jpg',
+      imagen: '../img/suite_embajador.jpg',
       checkIn: '27 Oct 2026',
       checkOut: '02 Nov 2026',
       noches: 6,
@@ -402,7 +423,7 @@ function renderMisReservas() {
       <div style="text-align: center; padding: 4rem 2rem; background: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--border-light);">
         <i class="ph-thin ph-bookmarks" style="font-size: 3.5rem; color: var(--navy-500); margin-bottom: 1rem; display: block;"></i>
         <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--navy-900); margin-bottom: 0.5rem;">Aún no tiene reservas registradas</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Explore nuestro catálogo de suites de alta gama y realice su primera estancia en Grand SGH.</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Explore nuestro catálogo de suites de alta gama y realice su primera estancia en 620 SGH.</p>
         <button class="btn-book-suite" style="margin-top: 1.5rem;" onclick="switchClientSection('section-catalogo')">
           <i class="ph ph-magnifying-glass"></i> Consultar Suites Disponibles
         </button>
@@ -439,13 +460,13 @@ function renderMisReservas() {
 
           <div class="reserva-specs-strip">
             <span><i class="ph-bold ph-bed"></i> ${r.categoria}</span>
-            <span><i class="ph-bold ph-user-check"></i> Titular: Dra. Elena Rostova</span>
+            <span><i class="ph-bold ph-user-check"></i> Titular: ${SGH_CLIENTE_STATE.guestName}</span>
             <span><i class="ph-bold ph-credit-card"></i> ${r.metodoPago}</span>
           </div>
         </div>
 
         <div style="font-size: 0.76rem; color: var(--accent-gold); font-weight: 600; margin-top: 0.75rem;">
-          <i class="ph-fill ph-check-circle"></i> Incluye desayuno gourmet a la suite y acceso preferencial al Spa SGH.
+          <i class="ph-fill ph-check-circle"></i> Incluye desayuno gourmet a la suite.
         </div>
       </div>
 
@@ -505,18 +526,18 @@ function printVoucher(reservaId) {
   if (!r) return;
   alert(
     `========================================\n` +
-    `GRAND SGH LUXURY RESIDENCES & HOTEL\n` +
+    `620 SGH LUXURY RESIDENCES & HOTEL\n` +
     `COMPROBANTE OFICIAL DE RESERVA\n` +
     `========================================\n` +
     `CÓDIGO OFICIAL: ${r.id}\n` +
-    `HUÉSPED TITULAR: Dra. Elena Rostova\n` +
+    `HUÉSPED TITULAR: ${SGH_CLIENTE_STATE.guestName}\n` +
     `SUITE ASIGNADA: ${r.suiteNombre} (${r.categoria})\n` +
     `CHECK-IN: ${r.checkIn} (15:00 hs)\n` +
     `CHECK-OUT: ${r.checkOut} (12:00 hs)\n` +
     `ESTADÍA: ${r.noches} noches\n` +
     `MONTO ABONADO: $${r.montoTotal.toLocaleString()} USD\n` +
     `ESTADO: ${r.estado}\n` +
-    `ACCESO DIGITAL: Código QR VIP Generado\n` +
+    `ACCESO DIGITAL: Código QR Generado\n` +
     `========================================`
   );
 }

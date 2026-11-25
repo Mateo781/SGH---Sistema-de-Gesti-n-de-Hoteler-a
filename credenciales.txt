@@ -1,0 +1,39 @@
+=============================================================================
+620 SGH - CREDENCIALES INICIALES DEL SISTEMA
+=============================================================================
+Base de datos inicial: js/db.js y sgh_620.sql
+
+1. GERENTE (accede a Vistas/index.html)
+   - Nombre:     Lic. Mateo González
+   - Correo:     mateo.gonzalez@620sgh.com
+   - Contraseña: Gerente2026*
+   - Estado:     ACTIVO
+
+2. CLIENTE (accede a Vistas/cliente.html)
+   - Nombre:     Dra. Elena Rostova
+   - Correo:     elena.rostova@geneva-health.ch
+   - Contraseña: Cliente2026*
+   - Estado:     ACTIVO
+
+3. ENCARGADO DE MANTENIMIENTO (accede a Vistas/mantenimiento.html)
+   - Nombre:     Ing. Darío Silva
+   - Correo:     dario.silva@620sgh.com
+   - Contraseña: Mantenimiento2026*
+   - Estado:     ACTIVO
+
+4. PERSONAL DE LIMPIEZA (accede a Vistas/limpieza.html)
+   - Nombre:     Carmen Vega
+   - Correo:     carmen.vega@620sgh.com
+   - Contraseña: Limpieza2026*
+   - Estado:     ACTIVO
+
+-----------------------------------------------------------------------------
+CUENTAS ADICIONALES EN LA BASE DE DATOS INICIAL
+-----------------------------------------------------------------------------
+- Gerente:       c.dominguez@620sgh.com      / Gerente2026*       (ACTIVO)
+- Cliente:       g.vance@vanceholdings.com   / Cliente2026*       (ACTIVO)
+- Cliente:       s.delacroix@parisart.fr     / Cliente2026*       (ACTIVO)
+- Mantenimiento: r.benitez@620sgh.com        / Mantenimiento2026* (ACTIVO)
+- Mantenimiento: e.varela@620sgh.com         / Mantenimiento2026* (ACTIVO)
+- Limpieza:      r.mendez@620sgh.com         / Limpieza2026*      (ACTIVO)
+- Limpieza:      j.morales@620sgh.com        / Limpieza2026*      (INHABILITADO - prueba de bloqueo)

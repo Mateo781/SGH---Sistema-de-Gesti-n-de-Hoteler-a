@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SGH - SISTEMA DE GESTIÓN HOTELERA | PORTAL DEL CLIENTE (GUEST & VIP LOUNGE)
+   SGH - SISTEMA DE GESTIÓN HOTELERA | PORTAL DEL CLIENTE (GUEST LOUNGE)
    Aesthetic Direction: High-End Riviera Executive Navy & Alabaster White
    Typography: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Precision UI)
    Casos de Uso: Consultar Disponibilidad, Realizar Reserva (<<include>> Pago),
@@ -105,17 +105,16 @@ html, body {
 }
 
 .brand-crest-gold {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
-  border: 1px solid rgba(217, 119, 6, 0.35);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: transparent;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fde68a;
-  font-size: 1.5rem;
-  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.2);
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.18);
 }
 
 .brand-names {

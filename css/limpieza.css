@@ -1,0 +1,896 @@
+/* ==========================================================================
+   620 SGH - SISTEMA DE GESTIÓN HOTELERA | PORTAL PERSONAL DE LIMPIEZA
+   Aesthetic Direction: Riviera Navy & Botanical Emerald Gobernanza
+   Typography: Cormorant Garamond (Titles) + Plus Jakarta Sans (Operations UI)
+   Casos de Uso: Consultar Habitaciones Asignadas/Pendientes, Registrar Limpieza
+   (<<include>> Notificar Habitación Limpia, <<extend>> No Molestar/Pospuesta),
+   Reportar Avería o Desperfecto
+   ========================================================================== */
+
+:root {
+  --navy-950: #050d1a;
+  --navy-900: #0a192f;
+  --navy-850: #0f2442;
+  --navy-800: #162f55;
+  --navy-700: #1e3a8a;
+  --navy-600: #2563eb;
+
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-muted: #e2e8f0;
+
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+
+  --text-primary: #0a192f;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+
+  --hk-emerald: #059669;
+  --hk-emerald-dark: #047857;
+  --hk-emerald-bg: #ecfdf5;
+  --hk-emerald-border: #a7f3d0;
+
+  --hk-amber: #d97706;
+  --hk-amber-bg: #fffbeb;
+  --hk-amber-border: #fde68a;
+
+  --hk-sky: #0284c7;
+  --hk-sky-bg: #f0f9ff;
+  --hk-sky-border: #bae6fd;
+
+  --hk-danger: #dc2626;
+  --hk-danger-bg: #fef2f2;
+  --hk-danger-border: #fecaca;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 3px rgba(10, 25, 47, 0.05);
+  --shadow-md: 0 6px 18px rgba(10, 25, 47, 0.08);
+  --shadow-lg: 0 18px 36px rgba(10, 25, 47, 0.14);
+  --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   NAVBAR SUPERIOR DE GOBERNANZA & LIMPIEZA
+   ========================================================================== */
+.hk-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 0 2.5rem;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-crest-hk {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: transparent;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(10, 25, 47, 0.18);
+}
+
+.brand-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--navy-900);
+  line-height: 1.1;
+}
+
+.brand-subtitle {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--hk-emerald-dark);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hk-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-subtle);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.hk-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hk-nav-btn:hover {
+  color: var(--navy-900);
+}
+
+.hk-nav-btn.active {
+  background: #ffffff;
+  color: var(--navy-900);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(10, 25, 47, 0.08);
+}
+
+.hk-nav-btn i {
+  font-size: 1.15rem;
+  color: var(--hk-emerald-dark);
+}
+
+.nav-counter-pill {
+  padding: 0.12rem 0.5rem;
+  background: var(--hk-emerald);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.hk-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.staff-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.5rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: 30px;
+}
+
+.staff-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--hk-emerald), #065f46);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border: 2px solid #ffffff;
+}
+
+.staff-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.staff-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  line-height: 1.1;
+}
+
+.staff-tag {
+  font-size: 0.65rem;
+  color: var(--hk-emerald-dark);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-nav-portal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--border-medium);
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  color: var(--navy-800);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.btn-nav-portal:hover {
+  background: var(--bg-subtle);
+  color: var(--navy-900);
+  border-color: var(--navy-700);
+}
+
+/* ==========================================================================
+   HERO BANNER GOBERNANZA & KPIS
+   ========================================================================== */
+.hk-hero-banner {
+  position: relative;
+  background: linear-gradient(135deg, var(--navy-950) 0%, #0a1e35 55%, #064e3b 100%);
+  color: #ffffff;
+  padding: 2.75rem 2.5rem 3.25rem 2.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hk-hero-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 48%;
+  background-image: url('../img/suite_embajador.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  mask-image: linear-gradient(to right, transparent, black);
+  -webkit-mask-image: linear-gradient(to right, transparent, black);
+  pointer-events: none;
+}
+
+.hero-inner-wrap {
+  max-width: 1250px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-crest-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(110, 231, 183, 0.35);
+  border-radius: 20px;
+  color: #a7f3d0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.hero-main-title {
+  font-family: var(--font-serif);
+  font-size: 2.65rem;
+  font-weight: 700;
+  line-height: 1.12;
+  margin-bottom: 0.65rem;
+  color: #ffffff;
+}
+
+.hero-main-title em {
+  font-style: italic;
+  color: #6ee7b7;
+}
+
+.hero-lead-text {
+  font-size: 0.96rem;
+  color: #cbd5e1;
+  max-width: 680px;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+.hk-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.hk-kpi-card {
+  background: rgba(10, 25, 47, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpi-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.kpi-val {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-top: 0.25rem;
+}
+
+.kpi-icon-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.kpi-icon-bubble.pending { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+.kpi-icon-bubble.active { background: rgba(2, 132, 199, 0.25); color: #7dd3fc; }
+.kpi-icon-bubble.clean { background: rgba(16, 185, 129, 0.24); color: #6ee7b7; }
+.kpi-icon-bubble.dnd { background: rgba(245, 158, 11, 0.24); color: #fde68a; }
+
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL & FILTROS
+   ========================================================================== */
+.hk-main-container {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 2.25rem 2.5rem 4.5rem 2.5rem;
+}
+
+.hk-section {
+  display: none;
+}
+
+.hk-section.active {
+  display: block;
+  animation: fadeIn 0.28s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.section-title-serif {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  line-height: 1.15;
+}
+
+.section-subtitle-muted {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.hk-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.hk-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.hk-chip {
+  padding: 0.45rem 0.9rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hk-chip:hover {
+  border-color: var(--navy-700);
+  color: var(--navy-900);
+}
+
+.hk-chip.active {
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+  color: #ffffff;
+}
+
+.hk-search-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.hk-input-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.75rem;
+}
+
+.hk-input-box i {
+  color: var(--text-muted);
+}
+
+.hk-input-box input,
+.hk-select {
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  outline: none;
+}
+
+.hk-select {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.48rem 0.75rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   CUADRÍCULA DE HABITACIONES
+   ========================================================================== */
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.35rem;
+}
+
+.room-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: var(--transition);
+  border-top: 4px solid var(--navy-700);
+}
+
+.room-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.room-card.status-pendiente { border-top-color: var(--navy-600); }
+.room-card.status-en_limpieza { border-top-color: var(--hk-sky); }
+.room-card.status-limpia { border-top-color: var(--hk-emerald); }
+.room-card.status-no_molestar { border-top-color: var(--hk-amber); }
+
+.room-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.room-number-block {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.room-num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  line-height: 1;
+}
+
+.room-floor-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.room-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.room-status-pill.pendiente { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.room-status-pill.en_limpieza { background: var(--hk-sky-bg); color: var(--hk-sky); border: 1px solid var(--hk-sky-border); }
+.room-status-pill.limpia { background: var(--hk-emerald-bg); color: var(--hk-emerald-dark); border: 1px solid var(--hk-emerald-border); }
+.room-status-pill.no_molestar { background: var(--hk-amber-bg); color: var(--hk-amber); border: 1px solid var(--hk-amber-border); }
+
+.room-suite-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  margin-bottom: 0.2rem;
+}
+
+.room-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+.room-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--bg-subtle);
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.room-meta-tag.urgent {
+  background: var(--hk-danger-bg);
+  color: var(--hk-danger);
+}
+
+.room-note-box {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--border-medium);
+  padding: 0.6rem 0.75rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.room-note-box.dnd {
+  background: var(--hk-amber-bg);
+  border-left-color: var(--hk-amber);
+  color: #78350f;
+}
+
+.room-note-box.clean {
+  background: var(--hk-emerald-bg);
+  border-left-color: var(--hk-emerald);
+  color: #065f46;
+}
+
+.room-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.btn-hk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.btn-hk-primary {
+  background: var(--navy-900);
+  color: #ffffff;
+  flex: 1;
+}
+
+.btn-hk-primary:hover {
+  background: var(--navy-800);
+}
+
+.btn-hk-emerald {
+  background: var(--hk-emerald);
+  color: #ffffff;
+  flex: 1;
+}
+
+.btn-hk-emerald:hover {
+  background: var(--hk-emerald-dark);
+}
+
+.btn-hk-amber {
+  background: var(--hk-amber-bg);
+  color: var(--hk-amber);
+  border-color: var(--hk-amber-border);
+}
+
+.btn-hk-amber:hover {
+  background: #fef3c7;
+}
+
+.btn-hk-danger-outline {
+  background: #ffffff;
+  color: var(--hk-danger);
+  border-color: var(--hk-danger-border);
+}
+
+.btn-hk-danger-outline:hover {
+  background: var(--hk-danger-bg);
+}
+
+/* ==========================================================================
+   BITÁCORA & AVERÍAS
+   ========================================================================== */
+.panel-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.hk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.hk-table th {
+  text-align: left;
+  padding: 0.9rem 1.15rem;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.hk-table td {
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.hk-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   MODALES DE CASOS DE USO
+   ========================================================================== */
+.hk-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 13, 26, 0.65);
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  z-index: 300;
+}
+
+.hk-modal-overlay.active {
+  display: flex;
+}
+
+.hk-modal-card {
+  width: 100%;
+  max-width: 540px;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.hk-modal-header {
+  background: var(--navy-900);
+  color: #ffffff;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hk-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.hk-modal-sub {
+  font-size: 0.74rem;
+  color: #93c5fd;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hk-modal-close {
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.hk-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hk-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.hk-control {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.hk-control:focus {
+  outline: none;
+  border-color: var(--hk-emerald);
+}
+
+.checklist-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  background: var(--bg-subtle);
+  padding: 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--navy-900);
+  cursor: pointer;
+}
+
+.checklist-item input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--hk-emerald);
+}
+
+.hk-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 980px) {
+  .hk-navbar {
+    padding: 0.75rem 1.25rem;
+    height: auto;
+    flex-wrap: wrap;
+  }
+  .hk-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hk-main-container {
+    padding: 1.5rem 1.25rem 3rem 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hk-kpi-grid,
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+}

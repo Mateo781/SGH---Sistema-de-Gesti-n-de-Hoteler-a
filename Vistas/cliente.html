@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SGH | Portal de Huéspedes & Suites VIP — Grand SGH</title>
-  <meta name="description" content="Portal oficial de reservas de suites exclusivas y gestión de estancias para clientes VIP de Grand SGH Luxury Residences & Hotel.">
+  <title>SGH | Portal de Huéspedes & Suites — 620 SGH</title>
+  <link rel="icon" type="image/png" href="../img/logo_sgh.png">
+  <meta name="description" content="Portal oficial de reservas de suites exclusivas y gestión de estancias para clientes de 620 SGH Luxury Residences & Hotel.">
 
   <!-- Google Fonts: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Modern Executive Interface) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +16,8 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <!-- Hoja de estilos del portal cliente y auth tokens -->
-  <link rel="stylesheet" href="css/auth.css?v=2">
-  <link rel="stylesheet" href="css/cliente.css?v=2">
+  <link rel="stylesheet" href="../css/auth.css?v=2">
+  <link rel="stylesheet" href="../css/cliente.css?v=2">
 </head>
 <body>
 
@@ -27,11 +28,11 @@
     
     <div class="brand-section">
       <div class="brand-crest-gold">
-        <i class="ph-bold ph-buildings"></i>
+        <img src="../img/logo_sgh.png" alt="Logo 620 SGH" class="brand-logo-img">
       </div>
       <div class="brand-names">
-        <span class="brand-title">GRAND SGH</span>
-        <span class="brand-subtitle">PORTAL CLIENTE VIP</span>
+        <span class="brand-title">620 SGH</span>
+        <span class="brand-subtitle">PORTAL CLIENTE</span>
       </div>
     </div>
 
@@ -47,34 +48,19 @@
         <span>Mis Reservas</span>
         <span class="nav-badge-pill" id="badge-mis-reservas">1</span>
       </button>
-
-      <button class="client-nav-btn" data-target="section-experiencias" id="nav-btn-experiencias">
-        <i class="ph-bold ph-sparkle"></i>
-        <span>Concierge & Spa</span>
-      </button>
     </nav>
 
-    <!-- Perfil del Huésped Activo & Enlaces a otros portales -->
+    <!-- Perfil del Huésped Activo -->
     <div class="guest-top-actions">
-      <div class="guest-profile-chip" title="Sesión activa como Huésped VIP">
+      <div class="guest-profile-chip" title="Sesión activa como Huésped">
         <div class="guest-avatar">ER</div>
         <div class="guest-meta">
           <span class="guest-name">Dra. Elena Rostova</span>
           <span class="guest-status-tag">
-            <i class="ph-fill ph-crown"></i> Huésped VIP Elite
+            <i class="ph-fill ph-user-check"></i> Huésped
           </span>
         </div>
       </div>
-
-      <a href="index.html" class="btn-nav-portal" title="Cambiar a la consola de gerencia">
-        <i class="ph ph-sliders-horizontal"></i>
-        <span>Gerencia</span>
-      </a>
-
-      <a href="mantenimiento.html" class="btn-nav-portal" title="Ver portal de mantenimiento técnico">
-        <i class="ph ph-wrench"></i>
-        <span>Mantenimiento</span>
-      </a>
 
       <a href="login.html" class="btn-nav-portal" title="Cerrar sesión">
         <i class="ph ph-sign-out"></i>
@@ -95,7 +81,7 @@
         Su santuario de serenidad y <em>elegancia atemporal</em>.
       </h1>
       <p class="hero-lead-text">
-        Bienvenida a Grand SGH, Dra. Rostova. Seleccione entre nuestras suites privadas con servicio de mayordomo las 24 horas, terrazas panorámicas y privacidad absoluta.
+        Bienvenida a 620 SGH, Dra. Rostova. Seleccione entre nuestras suites privadas con servicio de mayordomo las 24 horas, terrazas panorámicas y privacidad absoluta.
       </p>
     </div>
   </section>
@@ -205,60 +191,6 @@
       </div>
     </section>
 
-    <!-- -------------------------------------------------------------------- -->
-    <!-- SECCIÓN 3: EXPERIENCIAS & CONCIERGE SGH                               -->
-    <!-- -------------------------------------------------------------------- -->
-    <section class="client-section" id="section-experiencias">
-      <div class="section-head-row">
-        <div>
-          <h2 class="section-title-serif">Servicios Exclusivos de Concierge</h2>
-          <p class="section-subtitle-muted">
-            Complemente su estancia con nuestras amenidades de clase mundial.
-          </p>
-        </div>
-      </div>
-
-      <div class="suites-grid">
-        
-        <article class="suite-card">
-          <div class="suite-card-image-wrap">
-            <img src="img/grand_sgh_facade.jpg" alt="Spa SGH" class="suite-card-image">
-            <span class="suite-badge-floating gold"><i class="ph-bold ph-sparkle"></i> Wellness de Autor</span>
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span style="font-size:0.75rem; font-weight:700; color:var(--accent-gold); text-transform:uppercase;">BIENESTAR PRIVADO</span>
-              <h3 class="suite-title">The Royal Spa & Baños Termales</h3>
-              <p class="suite-description">Circuitos hidrotermales privados, masajes bioenergéticos y rituales de relajación aromática en cabinas VIP con vista al lago.</p>
-            </div>
-            <button class="btn-book-suite" onclick="alert('Solicitud de reserva de Spa enviada al Concierge VIP.')">
-              <i class="ph-bold ph-calendar-plus"></i>
-              <span>Agendar Sesión Privada</span>
-            </button>
-          </div>
-        </article>
-
-        <article class="suite-card">
-          <div class="suite-card-image-wrap">
-            <img src="img/suite_embajador.jpg" alt="Gastronomía SGH" class="suite-card-image">
-            <span class="suite-badge-floating"><i class="ph-bold ph-wine"></i> Michelin Excellence</span>
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span style="font-size:0.75rem; font-weight:700; color:var(--accent-gold); text-transform:uppercase;">ALTA COCINA</span>
-              <h3 class="suite-title">Catering Privado & Cava Sommelier</h3>
-              <p class="suite-description">Degustaciones personalizadas diseñadas por nuestro Chef Ejecutivo directo a su suite o en la terraza panorámica.</p>
-            </div>
-            <button class="btn-book-suite" onclick="alert('Solicitud de menú degustación enviada a Mayordomía.')">
-              <i class="ph-bold ph-fork-knife"></i>
-              <span>Solicitar Cena a la Suite</span>
-            </button>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
   </main>
 
   <!-- ====================================================================== -->
@@ -319,10 +251,10 @@
 
             <div class="payment-methods-strip">
               <button type="button" class="pay-card-pill active">
-                <i class="ph-bold ph-credit-card"></i> Tarjeta VIP
+                <i class="ph-bold ph-credit-card"></i> Tarjeta
               </button>
               <button type="button" class="pay-card-pill">
-                <i class="ph-bold ph-bank"></i> Concierge
+                <i class="ph-bold ph-bank"></i> Recepción
               </button>
               <button type="button" class="pay-card-pill">
                 <i class="ph-bold ph-currency-dollar"></i> Transferencia
@@ -356,7 +288,7 @@
         <!-- Columna Derecha: Resumen de Suite & Liquidación -->
         <div class="booking-summary-col">
           <div>
-            <img src="img/suite_embajador.jpg" alt="Suite Preview" class="summary-suite-thumb" id="modal-suite-img">
+            <img src="../img/suite_embajador.jpg" alt="Suite Preview" class="summary-suite-thumb" id="modal-suite-img">
             <h4 class="summary-suite-title" id="modal-suite-title">Suite Embajador</h4>
             <div class="summary-suite-cat" id="modal-suite-cat">SUITE 404 · Executive Corner Suite</div>
 
@@ -374,7 +306,7 @@
                 <span id="calc-subtotal-val">$6,500</span>
               </div>
               <div class="breakdown-row">
-                <span>Cargos de servicio VIP (10%)</span>
+                <span>Cargos de servicio (10%)</span>
                 <span id="calc-service-val">$650</span>
               </div>
               <div class="breakdown-row">
@@ -399,7 +331,8 @@
     </div>
   </div>
 
-  <!-- Script del Portal Cliente -->
-  <script src="js/cliente.js?v=2"></script>
+  <!-- Base de datos inicial y script del Portal Cliente -->
+  <script src="../js/db.js?v=1"></script>
+  <script src="../js/cliente.js?v=4"></script>
 </body>
 </html>

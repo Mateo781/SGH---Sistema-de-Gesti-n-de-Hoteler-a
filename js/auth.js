@@ -1,11 +1,13 @@
 /**
  * SGH - SISTEMA DE GESTIÓN HOTELERA | AUTHENTICATION CONTROLLER
- * Interactividad frontend para inicio de sesión, creación de cuenta y roles
+ * Inicio de sesión, registro y recuperación validados contra SGH_DB
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.SGH_DB) {
+    SGH_DB.init();
+  }
   initAuthTabs();
-  initDemoChips();
   initPasswordToggles();
   initPasswordStrengthMeter();
   initRoleSelectors();
@@ -13,32 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initRecoveryModal();
 });
 
-// Credenciales demo para agilizar pruebas
-const DEMO_ACCOUNTS = {
-  GERENTE: {
-    email: 'mateo.gonzalez@grandsgh.com',
-    pass: 'Gerente2026*',
-    role: 'GERENTE',
-    nombre: 'Lic. Mateo González'
-  },
-  CLIENTE: {
-    email: 'elena.rostova@geneva-health.ch',
-    pass: 'Cliente2026*',
-    role: 'CLIENTE',
-    nombre: 'Dra. Elena Rostova'
-  },
-  LIMPIEZA: {
-    email: 'carmen.vega@grandsgh.com',
-    pass: 'Limpieza2026*',
-    role: 'LIMPIEZA',
-    nombre: 'Carmen Vega'
-  },
-  MANTENIMIENTO: {
-    email: 'dario.silva@grandsgh.com',
-    pass: 'Mantenimiento2026*',
-    role: 'MANTENIMIENTO',
-    nombre: 'Ing. Darío Silva'
-  }
+const ROLE_LABELS = {
+  GERENTE: 'panel ejecutivo gerencial',
+  CLIENTE: 'portal del huésped',
+  MANTENIMIENTO: 'portal de operaciones de mantenimiento',
+  LIMPIEZA: 'portal de limpieza'
 };
 
 /**
@@ -60,7 +41,7 @@ function initAuthTabs() {
     formLogin.style.display = 'flex';
     formRegister.style.display = 'none';
     headline.textContent = 'Acceso al Portal SGH';
-    subhead.textContent = 'Ingrese sus credenciales certificadas de usuario para ingresar al sistema.';
+    subhead.textContent = 'Ingrese sus credenciales registradas para acceder al sistema.';
   });
 
   tabRegister.addEventListener('click', () => {
@@ -74,31 +55,7 @@ function initAuthTabs() {
 }
 
 /**
- * 2. Chips de Acceso Rápido Demo
- */
-function initDemoChips() {
-  const chips = document.querySelectorAll('.demo-chip');
-  const emailInput = document.getElementById('login-email');
-  const passInput = document.getElementById('login-pass');
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-
-      const roleKey = chip.getAttribute('data-demo-role');
-      const account = DEMO_ACCOUNTS[roleKey];
-      if (account && emailInput && passInput) {
-        emailInput.value = account.email;
-        passInput.value = account.pass;
-        showAuthToast(`Perfil cargado: ${account.nombre} (${roleKey})`, 'info');
-      }
-    });
-  });
-}
-
-/**
- * 3. Visibilidad de Contraseña (Toggle Ver / Ocultar)
+ * 2. Visibilidad de Contraseña (Toggle Ver / Ocultar)
  */
 function initPasswordToggles() {
   const toggleBtns = document.querySelectorAll('.toggle-password-btn');
@@ -121,7 +78,7 @@ function initPasswordToggles() {
 }
 
 /**
- * 4. Medidor de Fortaleza de Contraseña en Registro
+ * 3. Medidor de Fortaleza de Contraseña en Registro
  */
 function initPasswordStrengthMeter() {
   const regPass = document.getElementById('reg-pass');
@@ -166,7 +123,7 @@ function initPasswordStrengthMeter() {
 }
 
 /**
- * 5. Selector de Roles en Registro
+ * 4. Selector de Roles en Registro
  */
 function initRoleSelectors() {
   const roleCards = document.querySelectorAll('.role-choice-card');
@@ -182,7 +139,7 @@ function initRoleSelectors() {
 }
 
 /**
- * 6. Manejo de Formularios y Redirección
+ * 5. Manejo de Formularios y Validación contra SGH_DB
  */
 function initFormSubmissions() {
   const formLogin = document.getElementById('form-login');
@@ -193,7 +150,8 @@ function initFormSubmissions() {
     formLogin.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('login-email').value.trim();
-      const pass = document.getElementById('login-pass').value.trim();
+      const pass = document.getElementById('login-pass').value;
+      const rememberMe = Boolean(document.getElementById('remember-me')?.checked);
       const submitBtn = formLogin.querySelector('.btn-submit-auth');
 
       if (!email || !pass) {
@@ -201,31 +159,42 @@ function initFormSubmissions() {
         return;
       }
 
-      // Animación de carga
       const originalHtml = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> Verificando credenciales...';
 
       setTimeout(() => {
-        submitBtn.innerHTML = '<i class="ph-bold ph-check-circle"></i> Acceso concedido';
-        const lowerEmail = email.toLowerCase();
-        let targetPortal = 'index.html';
-        let portalName = 'panel ejecutivo gerencial';
+        const result = SGH_DB.authenticate(email, pass, rememberMe);
 
-        if (lowerEmail.includes('elena') || lowerEmail.includes('cliente')) {
-          targetPortal = 'cliente.html';
-          portalName = 'portal del huésped VIP';
-        } else if (lowerEmail.includes('dario') || lowerEmail.includes('mantenimiento') || lowerEmail.includes('silva')) {
-          targetPortal = 'mantenimiento.html';
-          portalName = 'portal de operaciones de mantenimiento';
+        if (!result.ok) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHtml;
+          showAuthToast(result.error, 'error');
+          return;
         }
-        
-        showAuthToast(`Sesión validada. Redirigiendo al ${portalName}...`, 'success');
+
+        const user = result.user;
+        const targetPortal = SGH_DB.getPortalUrl(user.rol);
+
+        if (!targetPortal) {
+          SGH_DB.logout();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalHtml;
+          showAuthToast(
+            `Bienvenido/a ${user.nombre}. El módulo de Personal de Limpieza aún se encuentra en preparación.`,
+            'info'
+          );
+          return;
+        }
+
+        submitBtn.innerHTML = '<i class="ph-bold ph-check-circle"></i> Acceso concedido';
+        const portalName = ROLE_LABELS[user.rol] || 'sistema SGH';
+        showAuthToast(`Bienvenido/a, ${user.nombre}. Redirigiendo al ${portalName}...`, 'success');
 
         setTimeout(() => {
           window.location.href = targetPortal;
-        }, 1000);
-      }, 1000);
+        }, 750);
+      }, 450);
     });
   }
 
@@ -235,13 +204,19 @@ function initFormSubmissions() {
       e.preventDefault();
       const nombre = document.getElementById('reg-nombre').value.trim();
       const email = document.getElementById('reg-email').value.trim();
-      const pass = document.getElementById('reg-pass').value.trim();
-      const passConf = document.getElementById('reg-pass-conf').value.trim();
+      const pass = document.getElementById('reg-pass').value;
+      const passConf = document.getElementById('reg-pass-conf').value;
       const selectedRole = document.querySelector('input[name="role-select"]:checked')?.value || 'CLIENTE';
+      const termsAccepted = document.getElementById('terms-check')?.checked;
       const submitBtn = formRegister.querySelector('.btn-submit-auth');
 
       if (!nombre || !email || !pass) {
         showAuthToast('Por favor ingrese todos los campos requeridos.', 'error');
+        return;
+      }
+
+      if (pass.length < 8) {
+        showAuthToast('La contraseña debe tener al menos 8 caracteres.', 'error');
         return;
       }
 
@@ -250,26 +225,61 @@ function initFormSubmissions() {
         return;
       }
 
-      // Animación de carga
+      if (!termsAccepted) {
+        showAuthToast('Debe aceptar las políticas y términos del servicio SGH.', 'error');
+        return;
+      }
+
+      const originalHtml = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> Registrando usuario...';
 
       setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Crear Cuenta en SGH</span> <i class="ph-bold ph-arrow-right"></i>';
-        showAuthToast(`¡Cuenta creada con éxito para ${nombre}! Rol: ${selectedRole}. Ahora puede iniciar sesión.`, 'success');
+        const res = SGH_DB.registerUser({
+          nombre,
+          email,
+          password: pass,
+          rol: selectedRole
+        });
 
-        // Cambiar a pestaña de login
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+
+        if (!res.ok) {
+          showAuthToast(res.error, 'error');
+          return;
+        }
+
+        showAuthToast(
+          `¡Cuenta creada para ${res.user.nombre} (${res.user.rol})! Ya puede iniciar sesión.`,
+          'success'
+        );
+
+        formRegister.reset();
+        document.querySelectorAll('.role-choice-card').forEach(card => {
+          const radio = card.querySelector('input[type="radio"]');
+          card.classList.toggle('selected', Boolean(radio && radio.checked));
+        });
+        const meterFill = document.getElementById('meter-fill');
+        const meterText = document.getElementById('meter-text');
+        if (meterFill) meterFill.style.width = '0%';
+        if (meterText) {
+          meterText.textContent = 'Seguridad';
+          meterText.style.color = 'var(--text-muted)';
+        }
+
+        // Cambiar a pestaña de login y completar el correo recién creado
         document.getElementById('tab-login-btn').click();
-        document.getElementById('login-email').value = email;
+        document.getElementById('login-email').value = res.user.email;
         document.getElementById('login-pass').value = '';
-      }, 1200);
+        document.getElementById('login-pass').focus();
+      }, 450);
     });
   }
 }
 
 /**
- * 7. Modal de Recuperación de Contraseña
+ * 6. Modal de Recuperación de Contraseña
  */
 function initRecoveryModal() {
   const modal = document.getElementById('modal-recovery');
@@ -305,14 +315,21 @@ function initRecoveryModal() {
         return;
       }
 
+      const res = SGH_DB.requestPasswordReset(email);
+      if (!res.ok) {
+        showAuthToast(res.error, 'error');
+        return;
+      }
+
       modal.classList.remove('active');
-      showAuthToast(`Enlace de restablecimiento enviado a ${email}. Verifique su bandeja de entrada.`, 'success');
+      formRecovery.reset();
+      showAuthToast(`Instrucciones de recuperación enviadas a ${res.email}.`, 'success');
     });
   }
 }
 
 /**
- * 8. Notificaciones Flotantes Toast
+ * 7. Notificaciones Flotantes Toast
  */
 function showAuthToast(message, type = 'info') {
   const existing = document.querySelector('.auth-toast');

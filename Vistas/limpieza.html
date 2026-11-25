@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGH | Gobernanza & Personal de Limpieza — 620 SGH</title>
+  <link rel="icon" type="image/png" href="../img/logo_sgh.png">
+  <meta name="description" content="Portal operativo para Personal de Limpieza de 620 SGH. Gestión de habitaciones asignadas, notificación de habitaciones limpias, registro de No Molestar y reporte de averías.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Hojas de estilos -->
+  <link rel="stylesheet" href="../css/auth.css?v=2">
+  <link rel="stylesheet" href="../css/limpieza.css?v=1">
+</head>
+<body>
+
+  <!-- ====================================================================== -->
+  <!-- NAVBAR SUPERIOR DEL PERSONAL DE LIMPIEZA                               -->
+  <!-- ====================================================================== -->
+  <header class="hk-navbar">
+    <div class="brand-section">
+      <div class="brand-crest-hk">
+        <img src="../img/logo_sgh.png" alt="Logo 620 SGH" class="brand-logo-img">
+      </div>
+      <div class="brand-names">
+        <span class="brand-title">620 SGH</span>
+        <span class="brand-subtitle">GOBERNANZA &amp; HOUSEKEEPING</span>
+      </div>
+    </div>
+
+    <!-- Navegación por Casos de Uso de Limpieza -->
+    <nav class="hk-nav-links">
+      <button class="hk-nav-btn active" data-target="section-habitaciones" id="nav-btn-habitaciones">
+        <i class="ph-bold ph-bed"></i>
+        <span>Habitaciones Asignadas</span>
+        <span class="nav-counter-pill" id="badge-pending-rooms">0</span>
+      </button>
+
+      <button class="hk-nav-btn" data-target="section-bitacora" id="nav-btn-bitacora">
+        <i class="ph-bold ph-bell-ringing"></i>
+        <span>Notificaciones &amp; Bitácora</span>
+      </button>
+    </nav>
+
+    <!-- Perfil Activo & Salida -->
+    <div class="hk-top-actions">
+      <div class="staff-badge" title="Sesión activa de Personal de Limpieza">
+        <div class="staff-avatar">CV</div>
+        <div class="staff-meta">
+          <span class="staff-name">Carmen Vega</span>
+          <span class="staff-tag">
+            <i class="ph-fill ph-check-circle"></i> Turno Activo
+          </span>
+        </div>
+      </div>
+
+      <a href="index.html" class="btn-nav-portal" id="btn-back-gerencia" style="display: none;" title="Volver al panel de gerencia">
+        <i class="ph ph-sliders-horizontal"></i>
+        <span>Gerencia</span>
+      </a>
+
+      <a href="login.html" class="btn-nav-portal" title="Cerrar sesión">
+        <i class="ph ph-sign-out"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- ====================================================================== -->
+  <!-- HERO BANNER DE GOBERNANZA                                              -->
+  <!-- ====================================================================== -->
+  <section class="hk-hero-banner">
+    <div class="hero-inner-wrap">
+      <div class="hero-crest-badge">
+        <i class="ph-fill ph-sparkle"></i> Panel Operativo de Limpieza &amp; Puesta a Punto
+      </div>
+
+      <h1 class="hero-main-title">
+        Control de habitaciones y <em>excelencia en cada suite</em>.
+      </h1>
+
+      <p class="hero-lead-text">
+        Consulte sus habitaciones asignadas por piso, registre el aseo completado para notificar al sistema, marque solicitudes de &ldquo;No Molestar&rdquo; o reporte averías técnicas al instante.
+      </p>
+
+      <div class="hk-kpi-grid">
+        <div class="hk-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">Pendientes de Aseo</span>
+            <span class="kpi-val" id="kpi-pend-rooms">0</span>
+          </div>
+          <div class="kpi-icon-bubble pending">
+            <i class="ph-bold ph-hourglass-medium"></i>
+          </div>
+        </div>
+
+        <div class="hk-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">En Limpieza Activa</span>
+            <span class="kpi-val" id="kpi-prog-rooms">0</span>
+          </div>
+          <div class="kpi-icon-bubble active">
+            <i class="ph-bold ph-broom"></i>
+          </div>
+        </div>
+
+        <div class="hk-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">Limpias &amp; Notificadas</span>
+            <span class="kpi-val" id="kpi-clean-rooms">0</span>
+          </div>
+          <div class="kpi-icon-bubble clean">
+            <i class="ph-bold ph-check-circle"></i>
+          </div>
+        </div>
+
+        <div class="hk-kpi-card">
+          <div class="kpi-left">
+            <span class="kpi-label">No Molestar / Pospuestas</span>
+            <span class="kpi-val" id="kpi-dnd-rooms">0</span>
+          </div>
+          <div class="kpi-icon-bubble dnd">
+            <i class="ph-bold ph-door"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================== -->
+  <!-- CONTENIDO PRINCIPAL                                                    -->
+  <!-- ====================================================================== -->
+  <main class="hk-main-container">
+
+    <!-- SECCIÓN 1: HABITACIONES ASIGNADAS / PENDIENTES -->
+    <section class="hk-section active" id="section-habitaciones">
+      <div class="section-head-row">
+        <div>
+          <h2 class="section-title-serif">Habitaciones &amp; Suites Asignadas</h2>
+          <p class="section-subtitle-muted">
+            Gestione el estado de limpieza de cada habitación y notifique su disponibilidad al sistema.
+          </p>
+        </div>
+
+        <button type="button" class="btn-hk btn-hk-danger-outline" id="btn-open-defect-global">
+          <i class="ph-bold ph-warning-octagon"></i>
+          <span>Reportar Avería</span>
+        </button>
+      </div>
+
+      <div class="hk-toolbar">
+        <div class="hk-filter-chips">
+          <button type="button" class="hk-chip active" data-status="ALL">Todas</button>
+          <button type="button" class="hk-chip" data-status="PENDIENTE">Pendientes</button>
+          <button type="button" class="hk-chip" data-status="EN_LIMPIEZA">En Limpieza</button>
+          <button type="button" class="hk-chip" data-status="NO_MOLESTAR">No Molestar</button>
+          <button type="button" class="hk-chip" data-status="LIMPIA">Limpias</button>
+        </div>
+
+        <div class="hk-search-cluster">
+          <select id="hk-floor-filter" class="hk-select" aria-label="Filtrar por piso">
+            <option value="ALL">Todos los pisos</option>
+            <option value="5">Piso 5</option>
+            <option value="4">Piso 4</option>
+            <option value="3">Piso 3</option>
+            <option value="2">Piso 2</option>
+            <option value="1">Piso 1</option>
+          </select>
+
+          <div class="hk-input-box">
+            <i class="ph ph-magnifying-glass"></i>
+            <input type="text" id="hk-search-input" placeholder="Buscar habitación o suite...">
+          </div>
+        </div>
+      </div>
+
+      <div class="rooms-grid" id="hk-rooms-grid">
+        <!-- Renderizado dinámico vía js/limpieza.js -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: NOTIFICACIONES ENVIADAS & BITÁCORA -->
+    <section class="hk-section" id="section-bitacora">
+      <div class="section-head-row">
+        <div>
+          <h2 class="section-title-serif">Notificaciones al Sistema &amp; Bitácora</h2>
+          <p class="section-subtitle-muted">
+            Registro en tiempo real de habitaciones notificadas como limpias, avisos de No Molestar y reportes enviados a Mantenimiento.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <div class="table-container">
+          <table class="hk-table">
+            <thead>
+              <tr>
+                <th>HORA</th>
+                <th>HABITACIÓN</th>
+                <th>EVENTO / ACCIÓN</th>
+                <th>DETALLE</th>
+                <th>RESPONSABLE</th>
+              </tr>
+            </thead>
+            <tbody id="hk-log-tbody">
+              <!-- Renderizado dinámico vía js/limpieza.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================== -->
+  <!-- MODAL 1: COMPLETAR LIMPIEZA & NOTIFICAR HABITACIÓN LIMPIA              -->
+  <!-- ====================================================================== -->
+  <div class="hk-modal-overlay" id="modal-complete-cleaning">
+    <div class="hk-modal-card">
+      <div class="hk-modal-header">
+        <div>
+          <div class="hk-modal-sub">Registrar Limpieza &bull; Notificar al Sistema</div>
+          <h3 class="hk-modal-title" id="complete-modal-title">Suite 404</h3>
+        </div>
+        <button type="button" class="hk-modal-close" data-close-modal="modal-complete-cleaning" aria-label="Cerrar">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <form class="hk-modal-body" id="form-complete-cleaning">
+        <input type="hidden" id="complete-room-id">
+
+        <div class="hk-field">
+          <span class="hk-label">Lista de verificación de higiene (<span id="checklist-progress">0/4</span>)</span>
+          <div class="checklist-box">
+            <label class="checklist-item">
+              <input type="checkbox" class="hk-check-item" checked>
+              <span>Cambio completo de blancos y lencería</span>
+            </label>
+            <label class="checklist-item">
+              <input type="checkbox" class="hk-check-item" checked>
+              <span>Desinfección de baño, grifería y superficies</span>
+            </label>
+            <label class="checklist-item">
+              <input type="checkbox" class="hk-check-item" checked>
+              <span>Reposición de amenities y minibar</span>
+            </label>
+            <label class="checklist-item">
+              <input type="checkbox" class="hk-check-item" checked>
+              <span>Inspección general sin desperfectos visibles</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="hk-field">
+          <label class="hk-label" for="complete-notes">Observaciones de entrega (opcional)</label>
+          <textarea id="complete-notes" class="hk-control" rows="2" placeholder="Ej: Suite lista para check-in anticipado."></textarea>
+        </div>
+
+        <div class="hk-modal-footer">
+          <button type="button" class="btn-hk btn-hk-amber" data-close-modal="modal-complete-cleaning">Cancelar</button>
+          <button type="submit" class="btn-hk btn-hk-emerald">
+            <i class="ph-bold ph-bell-ringing"></i>
+            <span>Notificar Habitación Limpia</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- MODAL 2: REGISTRAR 'NO MOLESTAR' / POSPUESTA                           -->
+  <!-- ====================================================================== -->
+  <div class="hk-modal-overlay" id="modal-dnd">
+    <div class="hk-modal-card">
+      <div class="hk-modal-header">
+        <div>
+          <div class="hk-modal-sub">Excepción de Limpieza &bull; Huésped</div>
+          <h3 class="hk-modal-title" id="dnd-modal-title">Suite 501</h3>
+        </div>
+        <button type="button" class="hk-modal-close" data-close-modal="modal-dnd" aria-label="Cerrar">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <form class="hk-modal-body" id="form-dnd">
+        <input type="hidden" id="dnd-room-id">
+
+        <div class="hk-field">
+          <label class="hk-label" for="dnd-reason">Motivo de postergación</label>
+          <select id="dnd-reason" class="hk-control" required>
+            <option value="Cartel 'No Molestar' en puerta">Cartel &ldquo;No Molestar&rdquo; en puerta</option>
+            <option value="Huésped solicitó realizar la limpieza más tarde">Huésped solicitó realizar la limpieza más tarde</option>
+            <option value="Reunión o descanso en curso dentro de la suite">Reunión o descanso en curso dentro de la suite</option>
+          </select>
+        </div>
+
+        <div class="hk-field">
+          <label class="hk-label" for="dnd-return-time">Horario sugerido para reintentar</label>
+          <input type="text" id="dnd-return-time" class="hk-control" placeholder="Ej: 16:30 hs" value="16:30 hs">
+        </div>
+
+        <div class="hk-modal-footer">
+          <button type="button" class="btn-hk btn-hk-amber" data-close-modal="modal-dnd">Cancelar</button>
+          <button type="submit" class="btn-hk btn-hk-primary">
+            <i class="ph-bold ph-clock-countdown"></i>
+            <span>Posponer / Registrar No Molestar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================== -->
+  <!-- MODAL 3: REPORTAR AVERÍA O DESPERFECTO                                 -->
+  <!-- ====================================================================== -->
+  <div class="hk-modal-overlay" id="modal-defect">
+    <div class="hk-modal-card">
+      <div class="hk-modal-header">
+        <div>
+          <div class="hk-modal-sub">Notificar a Mantenimiento Técnico</div>
+          <h3 class="hk-modal-title">Reportar Avería o Desperfecto</h3>
+        </div>
+        <button type="button" class="hk-modal-close" data-close-modal="modal-defect" aria-label="Cerrar">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <form class="hk-modal-body" id="form-defect">
+        <div class="hk-field">
+          <label class="hk-label" for="defect-room">Habitación o Área afectada</label>
+          <select id="defect-room" class="hk-control" required></select>
+        </div>
+
+        <div class="hk-field">
+          <label class="hk-label" for="defect-priority">Prioridad</label>
+          <select id="defect-priority" class="hk-control" required>
+            <option value="URGENTE">URGENTE — Impide ocupar la habitación</option>
+            <option value="ALTA">ALTA — Atención prioritaria</option>
+            <option value="MEDIA" selected>MEDIA — Revisión en turno</option>
+            <option value="BAJA">BAJA — Preventivo / Estético</option>
+          </select>
+        </div>
+
+        <div class="hk-field">
+          <label class="hk-label" for="defect-title">Resumen de la falla</label>
+          <input type="text" id="defect-title" class="hk-control" placeholder="Ej: Pérdida de agua en grifería del baño" required>
+        </div>
+
+        <div class="hk-field">
+          <label class="hk-label" for="defect-desc">Detalle observado</label>
+          <textarea id="defect-desc" class="hk-control" rows="3" placeholder="Describa el desperfecto encontrado durante la limpieza..." required></textarea>
+        </div>
+
+        <div class="hk-modal-footer">
+          <button type="button" class="btn-hk btn-hk-amber" data-close-modal="modal-defect">Cancelar</button>
+          <button type="submit" class="btn-hk btn-hk-danger-outline" style="background:var(--hk-danger); color:#fff; border-color:var(--hk-danger);">
+            <i class="ph-bold ph-paper-plane-tilt"></i>
+            <span>Enviar Reporte a Mantenimiento</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/db.js?v=1"></script>
+  <script src="../js/limpieza.js?v=1"></script>
+</body>
+</html>

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SGH | Executive Grand Hotel Management — Portal Gerente</title>
+  <title>SGH | 620 SGH Hotel Management — Portal Gerente</title>
+  <link rel="icon" type="image/png" href="../img/logo_sgh.png">
   <meta name="description" content="Sistema de Gestión Hotelera (SGH) - Panel de Control Ejecutivo y Auditoría para Gerencia.">
   
   <!-- Google Fonts: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Modern Executive Interface) -->
@@ -15,7 +16,7 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
   <!-- Hoja de estilos en carpeta /css -->
-  <link rel="stylesheet" href="css/styles.css?v=14">
+  <link rel="stylesheet" href="../css/styles.css?v=14">
 </head>
 <body>
   <div class="app-layout">
@@ -28,11 +29,11 @@
       <div class="sidebar-header">
         <div class="sidebar-brand">
           <div class="brand-crest">
-            <i class="ph-bold ph-buildings"></i>
+            <img src="../img/logo_sgh.png" alt="Logo 620 SGH" class="brand-logo-img">
           </div>
           <div class="brand-meta">
-            <span class="brand-name">GRAND SGH</span>
-            <span class="brand-sub">LUXURY RESIDENCES & HOTEL</span>
+            <span class="brand-name">620 SGH</span>
+            <span class="brand-sub">GESTIÓN DE HOSPEDAJE</span>
           </div>
         </div>
         <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Cerrar menú">
@@ -85,12 +86,12 @@
 
         <span class="nav-section-label" style="margin-top: 1.25rem;">ECOSISTEMA SGH</span>
         <div class="ecosystem-shortcuts">
-          <a href="cliente.html" class="eco-pill" style="text-decoration: none; cursor: pointer; color: #93c5fd; border-color: rgba(147, 197, 253, 0.35); background: rgba(30, 58, 138, 0.25);" title="Ingresar al Portal del Cliente VIP">
-            <i class="ph-fill ph-user-circle"></i> Portal Cliente VIP
+          <a href="cliente.html" class="eco-pill" style="text-decoration: none; cursor: pointer; color: #93c5fd; border-color: rgba(147, 197, 253, 0.35); background: rgba(30, 58, 138, 0.25);" title="Ingresar al Portal del Cliente">
+            <i class="ph-fill ph-user-circle"></i> Portal Cliente
           </a>
-          <div class="eco-pill" title="Portal Personal de Limpieza en preparación">
-            <i class="ph ph-sparkle"></i> Personal Limpieza
-          </div>
+          <a href="limpieza.html" class="eco-pill" style="text-decoration: none; cursor: pointer; color: #6ee7b7; border-color: rgba(16, 185, 129, 0.35); background: rgba(5, 150, 105, 0.2);" title="Ingresar al Portal del Personal de Limpieza">
+            <i class="ph-fill ph-sparkle"></i> Personal Limpieza
+          </a>
           <a href="mantenimiento.html" class="eco-pill" style="text-decoration: none; cursor: pointer; color: #fde68a; border-color: rgba(245, 158, 11, 0.35); background: rgba(180, 83, 9, 0.25);" title="Ingresar al Portal del Encargado de Mantenimiento">
             <i class="ph-fill ph-wrench"></i> Mantenimiento Técnico
           </a>
@@ -319,7 +320,7 @@
                     <i class="ph-bold ph-door"></i>
                   </div>
                   <div class="pulse-details">
-                    <div class="pulse-title">Recepción & Clientes VIP</div>
+                    <div class="pulse-title">Recepción & Clientes</div>
                     <div class="pulse-sub">Check-in de comitiva diplomática 18:00hs</div>
                   </div>
                   <span class="pulse-status-badge active">Listo</span>
@@ -439,7 +440,7 @@
               Encargados Mantenimiento (<span id="count-mantenimiento">3</span>)
             </button>
             <button class="role-filter-chip" data-role="CLIENTE" onclick="filterUsuariosByRole('CLIENTE')">
-              Clientes VIP (<span id="count-clientes">2</span>)
+              Clientes (<span id="count-clientes">2</span>)
             </button>
           </div>
 
@@ -775,7 +776,7 @@
 
           <div class="form-group">
             <label class="form-label" for="rep-recipient">Destinatarios de Envío (Caso de uso Enviar Reporte) *</label>
-            <input type="email" class="form-control" id="rep-recipient" value="directorio@grandsgh.com, auditoria@grandsgh.com" required>
+            <input type="email" class="form-control" id="rep-recipient" value="directorio@620sgh.com, auditoria@620sgh.com" required>
             <span class="field-hint">Los reportes enviados quedarán registrados con marca temporal en el historial.</span>
           </div>
 
@@ -829,7 +830,8 @@
   <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
   <div class="toast-container" id="toast-container"></div>
 
-  <!-- Script modular en carpeta /js -->
-  <script src="js/app.js?v=12"></script>
+  <!-- Base de datos inicial y script modular en carpeta /js -->
+  <script src="../js/db.js?v=1"></script>
+  <script src="../js/app.js?v=13"></script>
 </body>
 </html>

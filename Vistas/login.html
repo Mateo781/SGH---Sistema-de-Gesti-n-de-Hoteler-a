@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SGH | Acceso al Sistema de Gestión Hotelera — Grand SGH</title>
+  <title>SGH | Acceso al Sistema de Gestión Hotelera — 620 SGH</title>
+  <link rel="icon" type="image/png" href="../img/logo_sgh.png">
   <meta name="description" content="Portal de autenticación y registro de usuarios para el Sistema de Gestión Hotelera (SGH). Acceso para Gerentes, Clientes, Personal de Limpieza y Mantenimiento.">
 
   <!-- Google Fonts: Cormorant Garamond (Editorial Luxury) + Plus Jakarta Sans (Modern Executive Interface) -->
@@ -15,7 +16,7 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <!-- Hoja de estilos del portal de autenticación -->
-  <link rel="stylesheet" href="css/auth.css?v=2">
+  <link rel="stylesheet" href="../css/auth.css?v=2">
 </head>
 <body>
 
@@ -32,11 +33,11 @@
         <!-- Logo / Marca -->
         <div class="showcase-brand">
           <div class="showcase-crest">
-            <i class="ph-bold ph-buildings"></i>
+            <img src="../img/logo_sgh.png" alt="Logo 620 SGH" class="brand-logo-img">
           </div>
           <div>
-            <div class="showcase-title">GRAND SGH</div>
-            <div class="showcase-subtitle">LUXURY RESIDENCES & HOTEL</div>
+            <div class="showcase-title">620 SGH</div>
+            <div class="showcase-subtitle">SISTEMA DE GESTIÓN DE HOSPEDAJE</div>
           </div>
         </div>
 
@@ -116,10 +117,9 @@
       
       <!-- Topbar de la tarjeta -->
       <div class="auth-topbar">
-        <a href="index.html" class="back-to-home" title="Ir al panel administrativo">
-          <i class="ph-bold ph-arrow-left"></i>
-          <span>Entrar al Dashboard</span>
-        </a>
+        <span style="font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; color: var(--navy-700); text-transform: uppercase;">
+          620 SGH &bull; Acceso Seguro
+        </span>
         <div class="sys-badge">
           <span class="dot-green"></span> Servidores Activos
         </div>
@@ -146,28 +146,6 @@
           </button>
         </div>
 
-        <!-- Barra de Acceso Rápido Demo para Evaluación / Pruebas -->
-        <div class="demo-access-strip">
-          <div class="demo-access-label">
-            <span><i class="ph ph-lightning"></i> Acceso Rápido Demo (1-Click)</span>
-            <span style="font-size: 0.65rem; color: var(--text-muted);">Carga automática</span>
-          </div>
-          <div class="demo-chips">
-            <button type="button" class="demo-chip active" data-demo-role="GERENTE" title="Cargar credenciales de Gerente">
-              <i class="ph-fill ph-crown" style="color: #8b5cf6;"></i> Gerente
-            </button>
-            <button type="button" class="demo-chip" data-demo-role="CLIENTE" title="Cargar credenciales de Cliente VIP">
-              <i class="ph-fill ph-user" style="color: #3b82f6;"></i> Cliente VIP
-            </button>
-            <button type="button" class="demo-chip" data-demo-role="LIMPIEZA" title="Cargar credenciales de Limpieza">
-              <i class="ph-fill ph-sparkle" style="color: #10b981;"></i> Limpieza
-            </button>
-            <button type="button" class="demo-chip" data-demo-role="MANTENIMIENTO" title="Cargar credenciales de Mantenimiento">
-              <i class="ph-fill ph-wrench" style="color: #f59e0b;"></i> Mantenimiento
-            </button>
-          </div>
-        </div>
-
         <!-- ============================================== -->
         <!-- FORMULARIO 1: INICIAR SESIÓN (LOGIN)           -->
         <!-- ============================================== -->
@@ -181,8 +159,8 @@
                 type="email" 
                 id="login-email" 
                 class="form-input" 
-                placeholder="ejemplo@grandsgh.com" 
-                value="mateo.gonzalez@grandsgh.com" 
+                placeholder="ejemplo@620sgh.com" 
+                autocomplete="email"
                 required
               >
             </div>
@@ -197,7 +175,7 @@
                 id="login-pass" 
                 class="form-input" 
                 placeholder="••••••••••••" 
-                value="Gerente2026*" 
+                autocomplete="current-password"
                 required
               >
               <button type="button" class="toggle-password-btn" data-target="login-pass" aria-label="Mostrar contraseña">
@@ -271,7 +249,7 @@
                 <input type="radio" name="role-select" value="CLIENTE" class="role-choice-radio" checked>
                 <i class="ph-fill ph-user-circle role-choice-icon" style="color:#2563eb;"></i>
                 <div class="role-choice-meta">
-                  <span class="role-choice-title">Cliente VIP</span>
+                  <span class="role-choice-title">Cliente</span>
                   <span class="role-choice-badge">Huésped</span>
                 </div>
               </label>
@@ -350,7 +328,7 @@
 
       <!-- Pie del Panel -->
       <div class="auth-panel-footer">
-        <div>&copy; 2026 Grand SGH Hospitality Group.</div>
+        <div>&copy; 2026 620 SGH Hospitality Group.</div>
         <div>
           <a href="#">Privacidad</a> &bull; <a href="#">Términos</a>
         </div>
@@ -386,7 +364,7 @@
           <label class="form-label" for="recovery-email">Correo Electrónico</label>
           <div class="input-with-icon">
             <i class="ph ph-envelope-simple input-icon"></i>
-            <input type="email" id="recovery-email" class="form-input" placeholder="usuario@grandsgh.com" required>
+            <input type="email" id="recovery-email" class="form-input" placeholder="usuario@620sgh.com" required>
           </div>
         </div>
 
@@ -398,7 +376,8 @@
     </div>
   </div>
 
-  <!-- Script modular de autenticación -->
-  <script src="js/auth.js?v=2"></script>
+  <!-- Base de datos inicial y controlador de autenticación -->
+  <script src="../js/db.js?v=1"></script>
+  <script src="../js/auth.js?v=4"></script>
 </body>
 </html>
