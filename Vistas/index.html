@@ -16,7 +16,7 @@
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
   <!-- Hoja de estilos en carpeta /css -->
-  <link rel="stylesheet" href="../css/styles.css?v=14">
+  <link rel="stylesheet" href="../css/styles.css?v=15">
 </head>
 <body>
   <div class="app-layout">
@@ -71,6 +71,12 @@
           <i class="ph ph-calendar-check"></i>
           <span class="flex-grow">Gestionar Reservas</span>
           <span class="badge-counter" id="badge-active-reservas">6</span>
+        </button>
+
+        <button class="nav-link" data-tab="tab-suites" id="nav-suites">
+          <i class="ph ph-buildings"></i>
+          <span class="flex-grow">Auditar Suites</span>
+          <span class="badge-counter" id="badge-pending-suites">8</span>
         </button>
 
         <button class="nav-link" data-tab="tab-usuarios" id="nav-usuarios">
@@ -328,10 +334,15 @@
               </div>
 
               <div class="quick-action-cta">
-                <div class="cta-text">¿Desea generar el consolidado de auditoría del día?</div>
-                <button class="btn-outline w-100" onclick="openReportModal()">
-                  <i class="ph ph-file-pdf"></i> Generar Informe Ejecutivo
-                </button>
+                <div class="cta-text">¿Desea auditar el estado físico de las suites o generar el consolidado del día?</div>
+                <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+                  <button class="btn-primary-action w-100" style="justify-content: center;" onclick="switchTab('tab-suites')">
+                    <i class="ph-bold ph-clipboard-text"></i> Auditar Suites Ahora
+                  </button>
+                  <button class="btn-outline w-100" onclick="openReportModal()">
+                    <i class="ph ph-file-pdf"></i> Generar Informe Ejecutivo
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -397,6 +408,124 @@
                 <span class="legend-dot warning"></span> Requiere Pago
                 <span class="legend-dot danger"></span> Cancelada
               </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 2B: AUDITAR SUITES & HABITACIONES          -->
+        <!-- Caso de Uso: Auditar Suites y Operaciones      -->
+        <!-- ============================================== -->
+        <section class="tab-pane" id="tab-suites">
+
+          <div class="section-top-actions">
+            <div>
+              <h2 class="section-title">Auditoría Integral de Suites</h2>
+              <p class="section-subtitle">
+                Inspección gerencial de estándares de calidad, estado de limpieza en tiempo real, incidencias técnicas activas y habilitación de inventario.
+              </p>
+            </div>
+
+            <div class="filters-cluster">
+              <div class="search-input-wrap">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" id="suite-search" placeholder="Buscar suite, número o huésped..." oninput="filterSuitesAudit()">
+              </div>
+              <select id="suite-floor-filter" class="luxury-select" onchange="filterSuitesAudit()">
+                <option value="ALL">Todos los Pisos</option>
+                <option value="5">Piso 5 (Penthouse)</option>
+                <option value="4">Piso 4 (Ejecutivo)</option>
+                <option value="3">Piso 3 (Deluxe)</option>
+                <option value="2">Piso 2 (Lago)</option>
+                <option value="1">Piso 1 (Jardín)</option>
+              </select>
+              <div class="view-mode-toggle" role="group" aria-label="Cambiar vista de suites">
+                <button type="button" class="view-toggle-btn active" id="btn-suites-grid-view" onclick="setSuitesViewMode('grid')" title="Vista en tarjetas">
+                  <i class="ph-bold ph-squares-four"></i>
+                </button>
+                <button type="button" class="view-toggle-btn" id="btn-suites-table-view" onclick="setSuitesViewMode('table')" title="Vista en tabla">
+                  <i class="ph-bold ph-list-dashes"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPIs de Auditoría de Suites -->
+          <div class="suites-kpi-strip">
+            <div class="suite-kpi-card">
+              <div class="suite-kpi-icon success"><i class="ph-bold ph-seal-check"></i></div>
+              <div>
+                <span class="suite-kpi-label">Suites Aprobadas</span>
+                <div class="suite-kpi-val" id="kpi-suites-aprobadas">0</div>
+              </div>
+            </div>
+            <div class="suite-kpi-card">
+              <div class="suite-kpi-icon navy"><i class="ph-bold ph-hourglass-medium"></i></div>
+              <div>
+                <span class="suite-kpi-label">Pendientes de Auditoría</span>
+                <div class="suite-kpi-val" id="kpi-suites-pendientes">0</div>
+              </div>
+            </div>
+            <div class="suite-kpi-card">
+              <div class="suite-kpi-icon warning"><i class="ph-bold ph-warning-circle"></i></div>
+              <div>
+                <span class="suite-kpi-label">Observadas / Bloqueadas</span>
+                <div class="suite-kpi-val" id="kpi-suites-observadas">0</div>
+              </div>
+            </div>
+            <div class="suite-kpi-card">
+              <div class="suite-kpi-icon gold"><i class="ph-bold ph-chart-line-up"></i></div>
+              <div>
+                <span class="suite-kpi-label">Índice de Calidad SGH</span>
+                <div class="suite-kpi-val" id="kpi-suites-score">0%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chips de Filtro por Estado de Auditoría -->
+          <div class="role-filter-strip">
+            <button class="suite-filter-chip active" data-audit-status="ALL" onclick="filterSuitesByAuditStatus('ALL')">
+              Todas (<span id="count-suites-all">8</span>)
+            </button>
+            <button class="suite-filter-chip" data-audit-status="PENDIENTE" onclick="filterSuitesByAuditStatus('PENDIENTE')">
+              Pendientes (<span id="count-suites-pendiente">0</span>)
+            </button>
+            <button class="suite-filter-chip" data-audit-status="APROBADA" onclick="filterSuitesByAuditStatus('APROBADA')">
+              Aprobadas (<span id="count-suites-aprobada">0</span>)
+            </button>
+            <button class="suite-filter-chip" data-audit-status="OBSERVADA" onclick="filterSuitesByAuditStatus('OBSERVADA')">
+              Con Observaciones (<span id="count-suites-observada">0</span>)
+            </button>
+            <button class="suite-filter-chip" data-audit-status="BLOQUEADA" onclick="filterSuitesByAuditStatus('BLOQUEADA')">
+              Bloqueadas (<span id="count-suites-bloqueada">0</span>)
+            </button>
+          </div>
+
+          <!-- Contenedor Vista Tarjetas -->
+          <div class="suites-audit-grid" id="suites-audit-grid">
+            <!-- Renderizado dinámico vía JS -->
+          </div>
+
+          <!-- Contenedor Vista Tabla -->
+          <div class="panel-card" id="suites-audit-table-wrap" style="display: none;">
+            <div class="table-container">
+              <table class="luxury-table full-table">
+                <thead>
+                  <tr>
+                    <th>SUITE</th>
+                    <th>CATEGORÍA & TARIFA</th>
+                    <th>OCUPACIÓN</th>
+                    <th>LIMPIEZA / MANT.</th>
+                    <th>CALIDAD</th>
+                    <th>ESTADO AUDITORÍA</th>
+                    <th class="text-right">ACCIÓN</th>
+                  </tr>
+                </thead>
+                <tbody id="suites-audit-table-body">
+                  <!-- Renderizado dinámico vía JS -->
+                </tbody>
+              </table>
             </div>
           </div>
 
@@ -827,11 +956,45 @@
     </div>
   </div>
 
+  <!-- MODAL: Auditoría Integral de Suite -->
+  <div class="modal-backdrop" id="modal-audit-suite">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <i class="ph-bold ph-clipboard-text"></i>
+          </div>
+          <div>
+            <h3 class="modal-title" id="suite-audit-modal-title">Auditoría de Suite</h3>
+            <span class="modal-subtitle" id="suite-audit-modal-subtitle">Inspección de estándares operativos 620 SGH</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modal-audit-suite')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body" id="suite-audit-modal-body">
+        <!-- Inyectado dinámicamente vía JS -->
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-ghost" onclick="closeModal('modal-audit-suite')">Cerrar</button>
+        <button type="button" class="btn-outline" onclick="printAudit()">
+          <i class="ph ph-printer"></i> Imprimir Acta
+        </button>
+        <button type="submit" form="form-suite-audit" class="btn-primary-action">
+          <i class="ph-bold ph-seal-check"></i> Registrar Auditoría
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
   <div class="toast-container" id="toast-container"></div>
 
   <!-- Base de datos inicial y script modular en carpeta /js -->
   <script src="../js/db.js?v=1"></script>
-  <script src="../js/app.js?v=13"></script>
+  <script src="../js/app.js?v=14"></script>
 </body>
 </html>
